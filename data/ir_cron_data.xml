@@ -1,15 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    ir_cron_data.xml
+    ================
+    Registers the nightly scheduled action that expires equity trades stuck in
+    ``waiting_signature`` state.
+
+    The timeout window is governed by the system parameter
+    ``ics_altahtheeb_equity_trading.stale_signature_days`` (default: 5).
+    Adjust it under Settings → Technical → Parameters → System Parameters.
+
+    ``noupdate="1"`` prevents Odoo from overwriting administrator customisations
+    (e.g. a different run time) on module upgrades.
+-->
 <odoo noupdate="1">
 
     <record id="ir_cron_expire_stale_signature_requests" model="ir.cron">
+        <!--
+            Human-readable label shown in Settings → Technical → Automation → Scheduled Actions.
+        -->
         <field name="name">Al Tahtheeb Equity: Expire Stale Signature Requests</field>
+
+        <!--
+            Target the extended equity.transaction model where
+            _cron_expire_stale_signature_requests() is defined.
+            The external ID ``equity.model_equity_transaction`` is declared by the
+            upstream ``equity`` module; our inherit adds the cron method to it.
+        -->
         <field name="model_id" ref="equity.model_equity_transaction"/>
+
+        <!-- Execute a Python expression rather than a server action chain. -->
         <field name="state">code</field>
         <field name="code">model._cron_expire_stale_signature_requests()</field>
+
+        <!-- Run as the superuser so multi-company record access is unrestricted. -->
         <field name="user_id" ref="base.user_root"/>
+
+        <!-- Run once every day. -->
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
+
+        <!--
+            nextcall: schedule the first execution for tomorrow at 02:00 UTC so
+            it runs during off-peak hours.  Odoo requires an explicit nextcall
+            for the scheduler to pick up the job on first install.
+        -->
+        <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).replace(hour=2, minute=0, second=0, microsecond=0)"/>
+
+        <!--
+            Lower priority number = higher scheduler priority.
+            15 sits below critical system jobs (1–5) but above low-priority
+            maintenance tasks (20+).
+        -->
         <field name="priority">15</field>
+
+        <!-- Active by default; administrators can disable via the UI if needed. -->
         <field name="active" eval="True"/>
     </record>
 

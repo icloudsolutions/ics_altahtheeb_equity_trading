@@ -1,4 +1,26 @@
 # -*- coding: utf-8 -*-
+"""
+equity_transaction.py
+=====================
+Extends the native ``equity.transaction`` model with:
+
+* Saudi CJSC statutory compliance checks (ROFR, shareholder minimums,
+  ownership/voting concentration).
+* Legal e-signature flow that spawns a sequential ``sign.request``.
+* **Stale signature expiration** – the nightly cron
+  ``_cron_expire_stale_signature_requests`` finds any transaction stuck in
+  ``waiting_signature`` whose linked ``sign.request`` is older than the
+  configurable system-parameter threshold (default 5 days), then:
+
+    1. Cancels the Odoo Sign envelope via the native ``action_cancel()`` API.
+    2. Reverts the linked ``equity.marketplace.board`` listing back to
+       ``published`` and clears the matched counterparty so other partners
+       can place new bids.
+    3. Moves the transaction itself to ``cancelled``.
+    4. Posts a bilingual (EN/AR) chatter note on both the transaction and
+       the sign envelope, notifying all trade parties and scheduling a
+       warning activity for equity trading managers.
+"""
 
 import logging
 from collections import defaultdict
@@ -12,6 +34,10 @@ from . import tools
 
 _logger = logging.getLogger(__name__)
 
+# ---------------------------------------------------------------------------
+# Module-level constants
+# ---------------------------------------------------------------------------
+
 SIGN_TEMPLATE_NAME = 'Al Tahtheeb Share Transfer Agreement'
 LEGAL_FLOW_READY_STATE = 'confirmed'
 LEGAL_SIGNATURE_CONFIRMED_MESSAGE_EN = (
@@ -23,12 +49,18 @@ LEGAL_SIGNATURE_CONFIRMED_MESSAGE_AR = (
     "تم تحديث أرصدة سجل الأسهم بشكل آمن."
 )
 SHARES_PRECISION = 6
+
+# System-parameter key and fallback for the stale-signature timeout window.
 STALE_SIGNATURE_DAYS_PARAM = 'ics_altahtheeb_equity_trading.stale_signature_days'
 DEFAULT_STALE_SIGNATURE_DAYS = 5
 
 
 class EquityTransaction(models.Model):
     _inherit = 'equity.transaction'
+
+    # -------------------------------------------------------------------------
+    # Fields
+    # -------------------------------------------------------------------------
 
     company_id = fields.Many2one(
         comodel_name='res.company',
@@ -43,6 +75,7 @@ class EquityTransaction(models.Model):
         copy=False,
         readonly=True,
         tracking=True,
+        help="Odoo Sign envelope bound to this equity transfer agreement.",
     )
     state = fields.Selection(
         selection=[
@@ -62,8 +95,10 @@ class EquityTransaction(models.Model):
     rofr_notice_date = fields.Date(
         string="ROFR Notice Date",
         tracking=True,
-        help="Date the share block / transfer notice was logged to existing shareholders "
-             "to start the statutory right-of-first-refusal window.",
+        help=(
+            "Date the share block / transfer notice was logged to existing shareholders "
+            "to start the statutory right-of-first-refusal window."
+        ),
     )
     rofr_waiver_approved = fields.Boolean(
         string="ROFR Waived by Governance",
@@ -76,10 +111,16 @@ class EquityTransaction(models.Model):
         copy=False,
         readonly=True,
         index=True,
+        help="Source marketplace listing that originated this equity transaction.",
     )
+
+    # -------------------------------------------------------------------------
+    # Constraints
+    # -------------------------------------------------------------------------
 
     @api.constrains('state', 'sign_request_id')
     def _check_sign_request_state(self):
+        """Enforce sign-request / state coherence."""
         for transaction in self:
             if transaction.state == 'waiting_signature' and not transaction.sign_request_id:
                 raise ValidationError(_(
@@ -108,6 +149,10 @@ class EquityTransaction(models.Model):
                     request=transaction.sign_request_id.display_name,
                 )
 
+    # -------------------------------------------------------------------------
+    # Cap-table helpers
+    # -------------------------------------------------------------------------
+
     def _cap_table_exclude_id(self):
         """Return a persisted id for cap-table simulation, avoiding transient NewId values."""
         self.ensure_one()
@@ -125,6 +170,10 @@ class EquityTransaction(models.Model):
         if exclude_id:
             context['current_transaction_id'] = exclude_id
         return context
+
+    # -------------------------------------------------------------------------
+    # Governance helpers
+    # -------------------------------------------------------------------------
 
     def _get_governance_company(self):
         self.ensure_one()
@@ -155,6 +204,10 @@ class EquityTransaction(models.Model):
             ('securities', '>', 0),
         ], limit=1)
         return not existing_entry
+
+    # -------------------------------------------------------------------------
+    # Saudi statutory compliance checks
+    # -------------------------------------------------------------------------
 
     def _check_saudi_rofr_window(self):
         """Rule 1: enforce ROFR waiting period for external share transfers."""
@@ -290,7 +343,7 @@ class EquityTransaction(models.Model):
                 continue
 
             security_classes = SecurityClass.browse(list(class_ids))
-            votes_per_share = {security_class.id: security_class.share_votes or 0 for security_class in security_classes}
+            votes_per_share = {sc.id: sc.share_votes or 0 for sc in security_classes}
 
             for security_class in security_classes:
                 if security_class.share_votes > max_votes_per_share:
@@ -373,6 +426,10 @@ class EquityTransaction(models.Model):
             transaction._check_saudi_minimum_shareholder_count()
             transaction._check_governance_concentration_limits()
         return True
+
+    # -------------------------------------------------------------------------
+    # Legal signature flow
+    # -------------------------------------------------------------------------
 
     @api.model
     def _get_sign_template(self):
@@ -498,7 +555,7 @@ class EquityTransaction(models.Model):
             self.marketplace_listing_id.write({'state': 'sign_process'})
 
         _logger.info(
-            _("Legal signature flow initiated for equity.transaction %s; sign.request %s created."),
+            "Legal signature flow initiated for equity.transaction %s; sign.request %s created.",
             self.id,
             sign_request.id,
         )
@@ -528,9 +585,15 @@ class EquityTransaction(models.Model):
             'target': 'current',
         }
 
+    # -------------------------------------------------------------------------
+    # Post-signature finalisation
+    # -------------------------------------------------------------------------
+
     def _finalize_after_legal_signature(self):
         """Lock legally signed transactions into the native equity cap table ledger."""
-        waiting_transactions = self.filtered(lambda transaction: transaction.state == 'waiting_signature')
+        waiting_transactions = self.filtered(
+            lambda t: t.state == 'waiting_signature'
+        )
         if not waiting_transactions:
             return waiting_transactions
 
@@ -547,7 +610,7 @@ class EquityTransaction(models.Model):
             transaction.message_post(body=message)
 
         _logger.info(
-            _("Equity transactions %s finalized to signed_legal; cap table cache invalidated."),
+            "Equity transactions %s finalized to signed_legal; cap table cache invalidated.",
             waiting_transactions.ids,
         )
         return waiting_transactions
@@ -563,54 +626,124 @@ class EquityTransaction(models.Model):
             lambda item: item.partner_id == partner
         )[:1]
 
-    # -------------------------------------------------------------------------
-    # Stale signature expiration (nightly cron)
-    # -------------------------------------------------------------------------
+    # =========================================================================
+    # Stale signature expiration — nightly cron
+    # =========================================================================
 
     @api.model
     def _get_stale_signature_days(self):
-        """Read the stale signature timeout from System Parameters (default: 5 days)."""
+        """
+        Read the stale signature timeout (in days) from System Parameters.
+
+        Key : ``ics_altahtheeb_equity_trading.stale_signature_days``
+        Default: ``5``
+
+        Navigate to Settings → Technical → Parameters → System Parameters to
+        adjust the value without a code deployment.
+        """
         icp = self.env['ir.config_parameter'].sudo()
-        raw_value = icp.get_param(STALE_SIGNATURE_DAYS_PARAM, str(DEFAULT_STALE_SIGNATURE_DAYS))
+        raw_value = icp.get_param(
+            STALE_SIGNATURE_DAYS_PARAM,
+            str(DEFAULT_STALE_SIGNATURE_DAYS),
+        )
         try:
             days = int(raw_value)
         except (TypeError, ValueError):
+            _logger.warning(
+                "System parameter '%s' has a non-integer value '%s'; "
+                "falling back to default of %s day(s).",
+                STALE_SIGNATURE_DAYS_PARAM,
+                raw_value,
+                DEFAULT_STALE_SIGNATURE_DAYS,
+            )
             days = DEFAULT_STALE_SIGNATURE_DAYS
+        # Guard against accidental zero/negative configuration.
         return max(days, 1)
 
     @api.model
     def _cron_expire_stale_signature_requests(self):
-        """Nightly job: void trades stuck in waiting_signature and reopen marketplace listings."""
+        """
+        **Nightly cron entry point** — expire sign requests that are stuck.
+
+        Searches across all companies for ``equity.transaction`` records in
+        state ``waiting_signature`` whose linked ``sign.request`` was created
+        more than N days ago (N = system parameter, default 5).
+
+        For each stale record the method delegates to
+        ``_expire_stale_signature_request`` which:
+
+        1. Calls ``sign.request.action_cancel()`` — the native Odoo 19 Sign
+           cancellation API.
+        2. Reverts the linked ``equity.marketplace.board`` back to
+           ``published`` and clears ``matched_partner_id`` so the listing is
+           visible and biddable again.
+        3. Cancels the ``equity.transaction`` itself.
+        4. Posts bilingual chatter notifications and schedules manager
+           warning activities on both the transaction and the listing.
+
+        Runs in a ``with_company``-agnostic context so multi-company setups
+        are handled without additional filters.
+        """
         stale_days = self._get_stale_signature_days()
         cutoff = fields.Datetime.now() - timedelta(days=stale_days)
 
         stale_transactions = self.search([
             ('state', '=', 'waiting_signature'),
             ('sign_request_id', '!=', False),
+            # Only target envelopes still awaiting signatures; already-cancelled
+            # or signed envelopes are excluded automatically.
             ('sign_request_id.state', '=', 'sent'),
+            # The sign.request create_date marks when the envelope was dispatched.
             ('sign_request_id.create_date', '<=', cutoff),
         ])
+
         if not stale_transactions:
             _logger.info(
-                _("Stale signature cron: no equity.transaction records exceeded %(days)s day(s)."),
+                "Stale signature cron: no equity.transaction records exceeded %s day(s).",
                 stale_days,
             )
             return True
 
+        _logger.info(
+            "Stale signature cron: found %s transaction(s) exceeding %s day(s). "
+            "Processing expiration now.",
+            len(stale_transactions),
+            stale_days,
+        )
+
         expired_count = 0
         for transaction in stale_transactions.with_context(ics_expiring_stale_signature=True):
-            if transaction._expire_stale_signature_request(stale_days):
-                expired_count += 1
+            try:
+                if transaction._expire_stale_signature_request(stale_days):
+                    expired_count += 1
+            except Exception:
+                # Log and continue so one bad record does not abort the entire batch.
+                _logger.exception(
+                    "Stale signature cron: unexpected error while expiring "
+                    "equity.transaction %s — skipping.",
+                    transaction.id,
+                )
 
         _logger.info(
-            _("Stale signature cron voided %(count)s equity.transaction record(s) after %(days)s day(s)."),
+            "Stale signature cron completed: voided %s / %s equity.transaction record(s) "
+            "after %s day(s).",
             expired_count,
+            len(stale_transactions),
             stale_days,
         )
         return True
 
+    # -------------------------------------------------------------------------
+    # Stale expiration helpers (called per-record from the cron)
+    # -------------------------------------------------------------------------
+
     def _get_trade_notification_partners(self):
-        """Collect stakeholder partners who must be notified about a voided trade."""
+        """
+        Collect all stakeholder partners who must be notified about a voided trade.
+
+        Includes the seller, subscriber, cap-table company partner, and both
+        sides of the linked marketplace listing.
+        """
         self.ensure_one()
         partners = self.env['res.partner']
         if self.seller_id:
@@ -621,12 +754,24 @@ class EquityTransaction(models.Model):
             partners |= self.partner_id
         listing = self.marketplace_listing_id
         if listing:
-            partners |= listing.shareholder_id | listing.matched_partner_id
+            if listing.shareholder_id:
+                partners |= listing.shareholder_id
+            if listing.matched_partner_id:
+                partners |= listing.matched_partner_id
+        # Filter to records with real database IDs to avoid portal ghost records.
         return partners.filtered('id')
 
     def _schedule_stale_signature_admin_activity(self, summary):
-        """Create a backend todo for equity trading managers."""
-        activity_type = self.env.ref('mail.mail_activity_data_warning', raise_if_not_found=False)
+        """
+        Schedule a warning activity for every user in the equity trading
+        manager group so the team can review the automatic void.
+
+        Falls back to the ``base.user_root`` (OdooBot) if the security group
+        is not found, ensuring the activity is never silently dropped.
+        """
+        activity_type = self.env.ref(
+            'mail.mail_activity_data_warning', raise_if_not_found=False
+        )
         if not activity_type:
             activity_type = self.env.ref('mail.mail_activity_data_todo')
 
@@ -643,33 +788,49 @@ class EquityTransaction(models.Model):
             )
 
     def _log_stale_signature_void(self, stale_days, sign_request, listing):
-        """Notify stakeholders, administrators, and linked records about the automatic void."""
+        """
+        Post bilingual chatter notes on the transaction, the sign envelope,
+        and the marketplace listing to ensure both parties and administrators
+        receive a clear, auditable explanation for the automatic cancellation.
+
+        :param int stale_days:          Configured timeout that triggered expiry.
+        :param sign_request:            The ``sign.request`` recordset (may be
+                                        already cancelled but still in DB).
+        :param listing:                 The linked ``equity.marketplace.board``
+                                        record or an empty recordset.
+        """
         self.ensure_one()
         parties = self._get_trade_notification_partners()
+
         void_message = _(
             "%(english)s\n\n%(arabic)s",
             english=_(
-                "This equity trade was automatically voided because the linked Sign "
-                "request remained incomplete for more than %(days)s day(s). "
-                "The Sign envelope was cancelled and any linked marketplace listing "
-                "was released back to published status so other partners may bid again.",
+                "⚠️ This equity trade was automatically voided by the system because "
+                "the linked Sign request remained incomplete for more than %(days)s day(s). "
+                "The Sign envelope has been cancelled and any linked marketplace listing "
+                "has been released back to published status so other partners may bid again. "
+                "Please create a new trade if you wish to proceed.",
                 days=stale_days,
             ),
             arabic=_(
-                "تم إلغاء صفقة الأسهم هذه تلقائياً لأن طلب التوقيع المرتبط "
-                "لم يكتمل لأكثر من %(days)s يوماً. تم إلغاء مظروف التوقيع "
-                "وإعادة إعلان السوق إلى حالة المنشور ليتمكن الشركاء الآخرون من "
-                "تقديم عروض جديدة.",
+                "⚠️ تم إلغاء صفقة الأسهم هذه تلقائياً من قِبَل النظام لأن طلب التوقيع "
+                "المرتبط لم يكتمل لأكثر من %(days)s يوماً. تم إلغاء مظروف التوقيع "
+                "وإعادة إعلان السوق المرتبط إلى حالة المنشور ليتمكن الشركاء الآخرون من "
+                "تقديم عروض جديدة. يرجى إنشاء صفقة جديدة إذا كنت ترغب في المتابعة.",
                 days=stale_days,
             ),
         )
 
+        # 1. Chatter note on the transaction itself, mentioning all parties.
         self.message_post(body=void_message, partner_ids=parties.ids)
+
+        # 2. Schedule a warning activity for equity trading managers.
         self._schedule_stale_signature_admin_activity(_(
-            "Stale signature void on %s",
+            "Stale signature void — review required: %s",
             self.display_name,
         ))
 
+        # 3. Post on the sign envelope so the audit trail is complete there too.
         if sign_request.exists():
             sign_request.message_post(
                 body=_(
@@ -690,57 +851,168 @@ class EquityTransaction(models.Model):
                 partner_ids=parties.ids,
             )
 
+        # 4. Schedule a separate activity on the listing for full traceability.
         if listing:
             listing._schedule_stale_signature_admin_activity(_(
-                "Marketplace listing %s released after stale signature timeout",
+                "Marketplace listing %s released after stale signature timeout — review required",
                 listing.name,
             ))
 
     def _cancel_linked_sign_request(self):
-        """Cancel the native Sign envelope linked to this transaction."""
+        """
+        Cancel the Odoo Sign envelope linked to this transaction.
+
+        Uses the **native ``sign.request.action_cancel()``** method introduced
+        in Odoo 16 and preserved through Odoo 19. This is the correct public
+        API; calling the lower-level ``cancel()`` method directly bypasses the
+        Sign module's own state-machine guards and mail notifications.
+
+        A ``UserError`` is silently logged instead of re-raised so that a
+        Sign envelope that has already been cancelled (e.g., by an operator
+        manually) does not abort the broader expiration transaction.
+
+        :returns: ``True`` if the envelope was cancelled, ``False`` otherwise.
+        """
         self.ensure_one()
         sign_request = self.sign_request_id
-        if not sign_request or sign_request.state != 'sent':
+        if not sign_request:
             return False
-        # Native Sign API entry point is sign.request.cancel().
-        sign_request.cancel()
+        if sign_request.state != 'sent':
+            # Already cancelled, signed, or in another terminal state — nothing to do.
+            _logger.info(
+                "equity.transaction %s: sign.request %s is in state '%s'; "
+                "skipping action_cancel.",
+                self.id,
+                sign_request.id,
+                sign_request.state,
+            )
+            return False
+        try:
+            # action_cancel() is the public Odoo 19 Sign API.  It transitions
+            # the envelope to 'canceled', sends cancellation notifications to
+            # all signers, and is safe to call from server-side code.
+            sign_request.action_cancel()
+        except UserError as exc:
+            # Log but do not propagate; stale expiration must continue even if
+            # the Sign module raises (e.g., the template was archived).
+            _logger.warning(
+                "equity.transaction %s: action_cancel() on sign.request %s raised "
+                "UserError — %s. Continuing with transaction cancellation.",
+                self.id,
+                sign_request.id,
+                exc,
+            )
+            return False
         return True
 
     def _expire_stale_signature_request(self, stale_days):
-        """Void one stale trade, cancel Sign, and reopen the marketplace listing."""
+        """
+        Void a single stale trade in one atomic savepoint.
+
+        Execution order (must be preserved for constraint safety):
+
+        1. **Cancel the Sign envelope** — ``action_cancel()`` transitions the
+           ``sign.request`` to ``canceled`` while the ``sign_request_id`` FK is
+           still set on the transaction.  This avoids the
+           ``_check_sign_request_state`` constraint which forbids a ``cancelled``
+           transaction from carrying a sign request FK.
+
+        2. **Cancel the transaction** and **clear ``sign_request_id``** in one
+           ``write()`` call.  The constraint evaluates both fields together after
+           the write, so both reach their final values simultaneously.
+
+        3. **Release the marketplace listing** — revert to ``published``, clear
+           ``matched_partner_id`` and ``equity_transaction_id`` so new bids are
+           accepted.
+
+        4. **Notify all parties** — bilingual chatter + manager activity.
+
+        :param int stale_days: Timeout value used in notification messages.
+        :returns: ``True`` if the record was successfully expired.
+        """
         self.ensure_one()
         if self.state != 'waiting_signature' or not self.sign_request_id:
             return False
 
-        sign_request = self.sign_request_id
-        listing = self.marketplace_listing_id
+        sign_request = self.sign_request_id  # capture before clearing FK
+        listing = self.marketplace_listing_id  # capture before clearing FK
 
-        self._cancel_linked_sign_request()
-        self.write({
-            'state': 'cancelled',
-            'sign_request_id': False,
-        })
-        self.env['equity.cap.table'].invalidate_model()
+        with self.env.cr.savepoint():
+            # Step 1 — cancel the Odoo Sign envelope via the public API.
+            self._cancel_linked_sign_request()
 
-        if listing:
-            listing._release_after_stale_signature(stale_days=stale_days, transaction=self)
+            # Step 2 — cancel the transaction and clear the sign FK atomically.
+            # Both fields are written in a single call so the
+            # _check_sign_request_state constraint sees the correct final state.
+            self.write({
+                'state': 'cancelled',
+                'sign_request_id': False,
+            })
 
-        self._log_stale_signature_void(stale_days, sign_request, listing)
+            # Invalidate the cap-table cache so any downstream views reflect
+            # that this transfer is no longer in progress.
+            self.env['equity.cap.table'].invalidate_model()
+
+            # Step 3 — release the marketplace listing back to published state.
+            if listing:
+                listing._release_after_stale_signature(
+                    stale_days=stale_days,
+                    transaction=self,
+                )
+
+            # Step 4 — post notifications and schedule manager activities.
+            self._log_stale_signature_void(stale_days, sign_request, listing)
+
+        _logger.info(
+            "equity.transaction %s expired after %s day(s): "
+            "sign.request %s cancelled, state -> cancelled%s.",
+            self.id,
+            stale_days,
+            sign_request.id,
+            f", marketplace listing {listing.name} released" if listing else "",
+        )
         return True
 
+    # -------------------------------------------------------------------------
+    # Manual sign-request cancellation (UI action)
+    # -------------------------------------------------------------------------
+
     def action_cancel_sign_request(self):
-        """Manual wrapper around native sign.request.cancel() for UI actions."""
+        """
+        Allow an authorised backend user to manually cancel a pending sign
+        request and return the transaction to the confirmed state for re-processing.
+
+        This intentionally does **not** cancel the marketplace listing because a
+        manual operator action implies the parties still intend to trade — the
+        listing should only be released automatically after the stale timeout.
+        """
         self.ensure_one()
         if not self.sign_request_id:
             tools.raise_bilingual_user_error(
                 "No signature request is linked to this transaction.",
                 "لا يوجد طلب توقيع مرتبط بهذه المعاملة.",
             )
+        # Use the public action_cancel() API — same as the cron, for consistency.
         self._cancel_linked_sign_request()
         self.write({
             'state': LEGAL_FLOW_READY_STATE,
             'sign_request_id': False,
         })
+        # Revert listing to approved so it can be re-submitted for signature
+        # by the operator without re-matching from scratch.
         if self.marketplace_listing_id:
             self.marketplace_listing_id.write({'state': 'approved'})
+        self.message_post(body=_(
+            "%(english)s\n\n%(arabic)s",
+            english=_(
+                "Signature request manually cancelled by %(user)s. "
+                "Transaction returned to confirmed state for re-processing.",
+                user=self.env.user.display_name,
+            ),
+            arabic=_(
+                "تم إلغاء طلب التوقيع يدوياً بواسطة %(user)s. "
+                "أُعيدت المعاملة إلى الحالة المؤكدة لإعادة المعالجة.",
+                user=self.env.user.display_name,
+            ),
+        ))
         return True
