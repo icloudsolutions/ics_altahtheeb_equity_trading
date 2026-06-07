@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        equity_transaction_views.xml
+        ============================
+        Extends the native equity.transaction form view with the fields and
+        action buttons introduced by this module:
+
+        * ROFR notice date and waiver flag
+        * Sign request link and state management buttons
+        * Trade order log smart button
+        * FIFO disposal smart button and realized gain/loss fields
+        * Marketplace listing link
+    -->
+
+    <record id="equity_transaction_view_form_ics" model="ir.ui.view">
+        <field name="name">equity.transaction.form.ics.altahtheeb</field>
+        <field name="model">equity.transaction</field>
+        <field name="inherit_id" ref="equity.view_equity_transaction_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Smart buttons panel -->
+            <div name="button_box" position="inside">
+                <!-- Trade order log smart button -->
+                <button name="action_open_trade_order"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        invisible="not trade_order_ids">
+                    <span class="o_stat_text">Trade Log</span>
+                </button>
+                <!-- FIFO disposal smart button -->
+                <button name="action_open_fifo_disposal_wizard"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-calculator"
+                        invisible="not disposal_processed">
+                    <span class="o_stat_text">FIFO Result</span>
+                </button>
+            </div>
+
+            <!-- Header action buttons -->
+            <header position="inside">
+                <button name="action_initiate_legal_flow"
+                        string="Initiate Legal Signature"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'confirmed' or sign_request_id"/>
+                <button name="action_cancel_sign_request"
+                        string="Cancel Signature Request"
+                        type="object"
+                        class="btn-danger"
+                        groups="ics_altahtheeb_equity_trading.group_equity_trading_manager"
+                        invisible="state != 'waiting_signature' or not sign_request_id"/>
+            </header>
+
+            <!-- ROFR fields — insert after the standard partner_id field -->
+            <field name="partner_id" position="after">
+                <field name="rofr_notice_date"
+                       invisible="transaction_type not in ('transfer', 'issuance')"/>
+                <field name="rofr_waiver_approved"
+                       invisible="transaction_type not in ('transfer', 'issuance')"/>
+            </field>
+
+            <!-- Marketplace listing and sign request — append to the form sheet -->
+            <sheet position="inside">
+                <notebook>
+                    <page string="Trading &amp; Compliance" name="ics_trading_page">
+                        <group string="Marketplace">
+                            <field name="marketplace_listing_id" readonly="1"/>
+                            <field name="sign_request_id" readonly="1"/>
+                        </group>
+                        <group string="FIFO Disposal" invisible="transaction_type != 'transfer' or not seller_id">
+                            <field name="disposal_processed" readonly="1"/>
+                            <field name="disposal_cost_basis" readonly="1"/>
+                            <field name="disposal_proceeds" readonly="1"/>
+                            <field name="realized_gain_loss" readonly="1"/>
+                        </group>
+                        <field name="lot_allocation_ids" readonly="1"
+                               invisible="transaction_type != 'transfer' or not disposal_processed">
+                            <list create="0" delete="0" edit="0">
+                                <field name="buy_transaction_id"/>
+                                <field name="buy_transaction_date"/>
+                                <field name="qty"/>
+                                <field name="buy_unit_price"/>
+                                <field name="sell_unit_price"/>
+                                <field name="cost_basis"/>
+                                <field name="proceeds"/>
+                                <field name="realized_gain_loss"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Trade Audit Logs" name="ics_audit_page"
+                          invisible="not trade_order_ids">
+                        <button name="action_open_trade_audit_logs"
+                                string="View Audit Trail"
+                                type="object"
+                                class="btn-secondary mb-2"/>
+                        <field name="trade_order_ids" readonly="1">
+                            <list create="0" delete="0" edit="0">
+                                <field name="name"/>
+                                <field name="state"/>
+                                <field name="trade_side"/>
+                                <field name="transaction_date"/>
+                                <field name="quantity"/>
+                                <field name="unit_price"/>
+                                <field name="amount_total"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+
+        </field>
+    </record>
+
+    <!-- Search view extension for equity.transaction -->
+    <record id="equity_transaction_view_search_ics" model="ir.ui.view">
+        <field name="name">equity.transaction.search.ics.altahtheeb</field>
+        <field name="model">equity.transaction</field>
+        <field name="inherit_id" ref="equity.view_equity_transaction_search"/>
+        <field name="arch" type="xml">
+            <search position="inside">
+                <filter string="Waiting Signature"
+                        name="filter_waiting_signature"
+                        domain="[('state', '=', 'waiting_signature')]"/>
+                <filter string="Legally Signed"
+                        name="filter_signed_legal"
+                        domain="[('state', '=', 'signed_legal')]"/>
+                <filter string="ROFR Pending"
+                        name="filter_rofr_pending"
+                        domain="[('rofr_waiver_approved', '=', False), ('rofr_notice_date', '!=', False)]"/>
+                <filter string="FIFO Processed"
+                        name="filter_fifo_processed"
+                        domain="[('disposal_processed', '=', True)]"/>
+                <separator/>
+                <filter string="From Marketplace"
+                        name="filter_marketplace"
+                        domain="[('marketplace_listing_id', '!=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

@@ -68,7 +68,7 @@ class SignRequest(models.Model):
             sign_request.message_post(body=message)
 
         _logger.info(
-            _("sign.request write hook finalized equity.transaction %s after sign.request %s."),
+            "sign.request write hook finalized equity.transaction %s after sign.request %s.",
             finalized.ids,
             list(finalized_sign_request_ids),
         )

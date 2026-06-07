@@ -36,6 +36,7 @@ e-signatures (Sign) and stakeholder self-service on the website portal.
         'views/equity_portfolio_revaluation_views.xml',
         'views/equity_trade_order_views.xml',
         'views/equity_transaction_disposal_views.xml',
+        'views/equity_transaction_views.xml',
         'views/ics_altahtheeb_equity_trading_menus.xml',
         # Portal / website templates
         'views/ics_altahtheeb_equity_trading_portal_templates.xml',

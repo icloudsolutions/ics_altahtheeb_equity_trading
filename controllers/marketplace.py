@@ -6,7 +6,7 @@ from functools import partial
 from odoo import _, fields, http
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.http import request
-from odoo.tools import format_amount
+from odoo.tools import format_amount, format_date
 
 from .portal import AltahtheebEquityTradingPortal
 

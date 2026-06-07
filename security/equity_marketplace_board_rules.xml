@@ -27,7 +27,7 @@
         <field name="name">Marketplace manager: unrestricted within company</field>
         <field name="model_id" ref="model_equity_marketplace_board"/>
         <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('group_equity_trading_manager'))]"/>
+        <field name="groups" eval="[(4, ref('ics_altahtheeb_equity_trading.group_equity_trading_manager'))]"/>
     </record>
 
     <record id="equity_portfolio_asset_rule_company" model="ir.rule">
