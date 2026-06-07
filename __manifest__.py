@@ -19,8 +19,11 @@ e-signatures (Sign) and stakeholder self-service on the website portal.
     ],
     'data': [
         'data/equity_marketplace_sequence.xml',
+        'data/ir_config_parameter_data.xml',
+        'data/ir_cron_data.xml',
         # Security
         'security/ics_altahtheeb_equity_trading_security.xml',
+        'security/equity_marketplace_board_rules.xml',
         'security/ir.model.access.csv',
         # Backend views
         'views/ics_altahtheeb_equity_trading_views.xml',

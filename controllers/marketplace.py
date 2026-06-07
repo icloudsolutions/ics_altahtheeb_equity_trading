@@ -16,7 +16,7 @@ class AltahtheebEquityMarketplacePortal(AltahtheebEquityTradingPortal):
 
     def _prepare_marketplace_values(self, **extra_values):
         partner = request.env.user.partner_id
-        Listing = request.env['equity.marketplace.board'].sudo()
+        Listing = request.env['equity.marketplace.board']
 
         listings = Listing.search([
             ('state', '=', 'published'),
@@ -44,37 +44,53 @@ class AltahtheebEquityMarketplacePortal(AltahtheebEquityTradingPortal):
 
     def _get_marketplace_flash_messages(self):
         """Map query-string codes to localized portal banner messages."""
-        success_code = request.params.get('success')
-        error_code = request.params.get('error')
-
-        if success_code:
+        if request.params.get('success'):
             return {
                 'success_message': _(
-                    "Listing matched successfully. A draft equity transfer transaction "
-                    "has been created and is awaiting internal approval."
+                    "%(english)s\n\n%(arabic)s",
+                    english=_(
+                        "Listing matched successfully. A draft equity transfer transaction "
+                        "has been created and is awaiting internal approval."
+                    ),
+                    arabic=_(
+                        "تمت مطابقة الإعلان بنجاح. تم إنشاء معاملة نقل أسهم "
+                        "مسودة وهي بانتظار الاعتماد الداخلي."
+                    ),
                 ),
                 'error_message': False,
             }
 
         error_messages = {
             'own_listing': _(
-                "You cannot match your own marketplace listing."
+                "%(english)s\n\n%(arabic)s",
+                english=_("You cannot match your own marketplace listing."),
+                arabic=_("لا يمكنك مطابقة إعلانك الخاص في السوق."),
             ),
             'not_found': _(
-                "This marketplace listing is no longer available."
+                "%(english)s\n\n%(arabic)s",
+                english=_("This marketplace listing is no longer available."),
+                arabic=_("لم يعد إعلان السوق هذا متاحاً."),
             ),
             'rofr_pending': _(
-                "The Right of First Refusal (ROFR) window is still open for this listing. "
-                "Please wait until the deadline has passed."
+                "%(english)s\n\n%(arabic)s",
+                english=_(
+                    "The Right of First Refusal (ROFR) window is still open for this listing. "
+                    "Please wait until the deadline has passed."
+                ),
+                arabic=_(
+                    "لا تزال فترة حق الأولوية في الشراء (ROFR) سارية لهذا الإعلان. "
+                    "يرجى الانتظار حتى انتهاء الموعد النهائي."
+                ),
             ),
             'access': _(
-                "You do not have permission to perform this marketplace action."
+                "%(english)s\n\n%(arabic)s",
+                english=_("You do not have permission to perform this marketplace action."),
+                arabic=_("ليس لديك صلاحية لتنفيذ هذا الإجراء في السوق."),
             ),
         }
         session_error = request.session.pop('marketplace_error', False)
+        error_code = request.params.get('error')
         error_message = session_error or error_messages.get(error_code)
-        if error_code == '1' and session_error:
-            error_message = session_error
 
         return {
             'success_message': False,
@@ -106,29 +122,28 @@ class AltahtheebEquityMarketplacePortal(AltahtheebEquityTradingPortal):
     )
     def portal_equity_marketplace_match(self, listing_id, **kw):
         partner = request.env.user.partner_id
-        listing = request.env['equity.marketplace.board'].sudo().browse(listing_id)
+        listing = request.env['equity.marketplace.board'].browse(listing_id)
 
-        if not listing.exists() or listing.state != 'published':
+        if not listing.exists():
             return request.redirect('/my/equity/marketplace?error=not_found')
 
-        if listing.shareholder_id == partner:
+        try:
+            listing.check_access('read')
+        except AccessError:
             _logger.warning(
-                "Portal user %s attempted to match their own listing %s.",
+                _("Portal marketplace access denied for user partner %s on listing %s."),
                 partner.id,
                 listing_id,
             )
-            return request.redirect('/my/equity/marketplace?error=own_listing')
-
-        if listing.rofr_deadline and fields.Date.context_today(listing) < listing.rofr_deadline:
-            return request.redirect('/my/equity/marketplace?error=rofr_pending')
+            return request.redirect('/my/equity/marketplace?error=access')
 
         try:
             listing.action_portal_match_and_create_transaction(partner.id)
         except AccessError as error:
-            request.session['marketplace_error'] = error.args[0]
+            request.session['marketplace_error'] = error.args[0] if error.args else str(error)
             return request.redirect('/my/equity/marketplace?error=access')
         except (UserError, ValidationError) as error:
-            request.session['marketplace_error'] = error.args[0]
+            request.session['marketplace_error'] = error.args[0] if error.args else str(error)
             return request.redirect('/my/equity/marketplace?error=1')
 
         return request.redirect('/my/equity/marketplace?success=1')

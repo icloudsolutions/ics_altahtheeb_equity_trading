@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_equity_marketplace_board_user,equity.marketplace.board.user,model_equity_marketplace_board,base.group_user,1,1,1,0
-access_equity_marketplace_board_manager,equity.marketplace.board.manager,model_equity_marketplace_board,base.group_system,1,1,1,1
+access_equity_marketplace_board_user,equity.marketplace.board.user,model_equity_marketplace_board,group_equity_trading_user,1,1,1,0
+access_equity_marketplace_board_manager,equity.marketplace.board.manager,model_equity_marketplace_board,group_equity_trading_manager,1,1,1,1
 access_equity_marketplace_board_portal,equity.marketplace.board.portal,model_equity_marketplace_board,base.group_portal,1,0,0,0

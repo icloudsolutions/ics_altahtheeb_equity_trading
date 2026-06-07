@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <template id="portal_trading_templates"
+              name="Al Tahtheeb Equity Trading Portal Templates">
+        <!-- Wrapper record grouping Al Tahtheeb portal trading views. -->
+    </template>
+
+    <template id="portal_my_home_portfolio"
+              name="Portal My Home: Portfolio Dashboard"
+              inherit_id="portal.portal_my_home"
+              customize_show="True"
+              priority="35">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_service_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_service_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/equity/static/src/img/equity.svg'"/>
+                <t t-set="title">My Portfolio</t>
+                <t t-set="url" t-value="'/my/equity/portfolio'"/>
+                <t t-set="text">Review your shareholdings and completed trades</t>
+                <t t-set="placeholder_count" t-value="'portfolio_count'"/>
+            </t>
+        </div>
+    </template>
+
     <template id="portal_sign_iframe_view" name="Al Tahtheeb Equity Sign Iframe">
         <t t-call="portal.portal_layout">
             <t t-set="additional_title">Sign Equity Transaction</t>
@@ -48,6 +72,182 @@
         </t>
     </template>
 
+    <template id="portal_portfolio_dashboard_view" name="My Portfolio Dashboard">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">My Portfolio Dashboard</t>
+
+            <div class="o_portal_wrap">
+                <div class="container-fluid container-lg py-4 px-3 px-md-4">
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="/my/home" class="text-decoration-none">My Account</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/my/equity" class="text-decoration-none">Equity Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                My Portfolio
+                            </li>
+                        </ol>
+                    </nav>
+
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                                <div>
+                                    <h1 class="h2 mb-2 fw-semibold">My Portfolio Dashboard</h1>
+                                    <p class="text-muted mb-0">
+                                        Your live share allocations and completed equity ledger activity.
+                                    </p>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 align-self-start align-self-md-center">
+                                    <a href="/my/equity/marketplace"
+                                       class="btn btn-outline-primary">
+                                        Marketplace
+                                    </a>
+                                    <a href="/my/equity"
+                                       class="btn btn-outline-secondary">
+                                        Equity Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-12 col-md-6">
+                            <div class="card shadow-sm border-0 h-100">
+                                <div class="card-body p-4">
+                                    <p class="text-uppercase text-muted small fw-semibold mb-2">
+                                        Total Shares Owned
+                                    </p>
+                                    <p class="display-6 fw-semibold mb-1 text-primary">
+                                        <t t-esc="total_shares"/>
+                                    </p>
+                                    <p class="text-muted small mb-0">
+                                        Aggregated active share allocations from the equity cap table.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="card shadow-sm border-0 h-100">
+                                <div class="card-body p-4">
+                                    <p class="text-uppercase text-muted small fw-semibold mb-2">
+                                        Current Portfolio Valuation
+                                    </p>
+                                    <p class="display-6 fw-semibold mb-1 text-success">
+                                        <t t-esc="fmt_amount(portfolio_valuation, display_currency)"/>
+                                    </p>
+                                    <p class="text-muted small mb-0">
+                                        <t t-if="has_mixed_currencies">
+                                            Estimated value across companies; amounts may use mixed currencies.
+                                        </t>
+                                        <t t-else="">
+                                            Based on the latest company valuation and your current ownership share.
+                                        </t>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <t t-if="share_classes">
+                        <div class="card shadow-sm border-0 mb-4">
+                            <div class="card-header bg-white py-3 px-4">
+                                <h2 class="h5 mb-0 fw-semibold">Current Share Allocations</h2>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th scope="col" class="ps-4 py-3">Company</th>
+                                                <th scope="col" class="py-3">Share Class</th>
+                                                <th scope="col" class="py-3 text-end">Shares</th>
+                                                <th scope="col" class="pe-4 py-3 text-end">Estimated Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="share_classes" t-as="allocation">
+                                                <tr>
+                                                    <td class="ps-4 py-3" t-esc="allocation['company_name']"/>
+                                                    <td class="py-3" t-esc="allocation['class_name']"/>
+                                                    <td class="py-3 text-end fw-semibold" t-esc="allocation['shares']"/>
+                                                    <td class="pe-4 py-3 text-end">
+                                                        <t t-esc="fmt_amount(allocation['valuation'], allocation['currency'])"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-white py-3 px-4">
+                            <h2 class="h5 mb-0 fw-semibold">Historical Transactions Log</h2>
+                        </div>
+                        <div class="card-body p-0">
+                            <t t-if="not transaction_rows">
+                                <div class="p-4 p-md-5">
+                                    <div class="alert alert-info mb-0" role="status">
+                                        No completed equity transactions are recorded for your account yet.
+                                    </div>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th scope="col" class="ps-4 py-3">Date</th>
+                                                <th scope="col" class="py-3">Transaction Reference</th>
+                                                <th scope="col" class="py-3">Share Class</th>
+                                                <th scope="col" class="py-3">Operation Type</th>
+                                                <th scope="col" class="py-3 text-end">Share Qty</th>
+                                                <th scope="col" class="py-3 text-end">Unit Price</th>
+                                                <th scope="col" class="pe-4 py-3 text-end">Ledger State</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="transaction_rows" t-as="row">
+                                                <tr>
+                                                    <td class="ps-4 py-3 text-nowrap">
+                                                        <t t-esc="fmt_date(row['date'])"/>
+                                                    </td>
+                                                    <td class="py-3 fw-semibold" t-esc="row['reference']"/>
+                                                    <td class="py-3" t-esc="row['share_class']"/>
+                                                    <td class="py-3">
+                                                        <span class="fw-semibold">
+                                                            <t t-esc="row['operation_label']"/>
+                                                        </span>
+                                                    </td>
+                                                    <td class="py-3 text-end" t-esc="row['qty']"/>
+                                                    <td class="py-3 text-end">
+                                                        <t t-esc="fmt_amount(row['unit_price'], row['currency'])"/>
+                                                    </td>
+                                                    <td class="pe-4 py-3 text-end">
+                                                        <span class="badge rounded-pill text-bg-success">
+                                                            <t t-esc="row['state_label']"/>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
     <template id="marketplace_dashboard_view" name="Al Tahtheeb Marketplace Dashboard">
         <t t-call="portal.portal_layout">
             <t t-set="additional_title">Al Tahtheeb Internal Share Marketplace</t>
@@ -79,9 +279,14 @@
                                         Review active share listings, ROFR notice periods, and submit buy proposals.
                                     </p>
                                 </div>
-                                <a href="/my/equity" class="btn btn-outline-secondary align-self-start align-self-md-center">
-                                    Back to Dashboard
-                                </a>
+                                <div class="d-flex flex-wrap gap-2 align-self-start align-self-md-center">
+                                    <a href="/my/equity/portfolio" class="btn btn-outline-primary">
+                                        My Portfolio
+                                    </a>
+                                    <a href="/my/equity" class="btn btn-outline-secondary align-self-start align-self-md-center">
+                                        Back to Dashboard
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

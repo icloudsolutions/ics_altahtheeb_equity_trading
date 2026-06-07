@@ -4,7 +4,9 @@ import logging
 from datetime import timedelta
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import AccessError, UserError, ValidationError
+
+from . import tools
 
 _logger = logging.getLogger(__name__)
 
@@ -50,7 +52,7 @@ class EquityMarketplaceBoard(models.Model):
         required=True,
         domain=[('class_type', '=', 'shares')],
         tracking=True,
-        help="Native Odoo 19 equity security class (share class) offered or requested.",
+        help="Native Odoo 19 equity security class offered or requested.",
     )
     qty = fields.Integer(
         string="Quantity",
@@ -122,7 +124,7 @@ class EquityMarketplaceBoard(models.Model):
 
     _name_unique = models.Constraint(
         'UNIQUE(name)',
-        'The listing ID must be unique.',
+        _('The listing ID must be unique.'),
     )
 
     @api.depends('qty', 'price_unit')
@@ -134,16 +136,35 @@ class EquityMarketplaceBoard(models.Model):
     def _check_positive_values(self):
         for listing in self:
             if listing.qty <= 0:
-                raise ValidationError(_("Share quantity must be strictly positive."))
+                tools.raise_bilingual_validation(
+                    "Share quantity must be strictly positive.",
+                    "يجب أن تكون كمية الأسهم أكبر من صفر.",
+                )
             if listing.price_unit < 0:
-                raise ValidationError(_("Price per share cannot be negative."))
+                tools.raise_bilingual_validation(
+                    "Price per share cannot be negative.",
+                    "لا يمكن أن يكون سعر السهم سالباً.",
+                )
 
     @api.constrains('shareholder_id', 'matched_partner_id')
     def _check_distinct_counterparties(self):
         for listing in self.filtered('matched_partner_id'):
             if listing.shareholder_id == listing.matched_partner_id:
+                tools.raise_bilingual_validation(
+                    "The matched counterparty must be different from the listing shareholder.",
+                    "يجب أن يكون الطرف المقابل مختلفاً عن المساهم صاحب الإعلان.",
+                )
+
+    @api.constrains('state', 'matched_partner_id', 'equity_transaction_id')
+    def _check_state_consistency(self):
+        for listing in self:
+            if listing.state in ('matched', 'approved', 'sign_process', 'done') and not listing.matched_partner_id:
                 raise ValidationError(_(
-                    "The matched counterparty must be different from the listing shareholder."
+                    "A matched counterparty is required once the listing leaves the published state."
+                ))
+            if listing.equity_transaction_id and listing.state not in ('matched', 'approved', 'sign_process', 'done'):
+                raise ValidationError(_(
+                    "An equity transaction can only be linked after the listing has been matched."
                 ))
 
     @api.model_create_multi
@@ -156,74 +177,97 @@ class EquityMarketplaceBoard(models.Model):
                 )
         listings = super().create(vals_list)
         _logger.info(
-            "Created equity marketplace listing(s): %s",
-            listings.mapped('name'),
+            _("Created equity marketplace listing(s): %s"),
+            ', '.join(listings.mapped('name')),
         )
         return listings
+
+    def _selection_label(self, field_name):
+        self.ensure_one()
+        return dict(
+            self._fields[field_name]._description_selection(self.env)
+        ).get(getattr(self, field_name), getattr(self, field_name))
 
     def action_publish(self):
         for listing in self:
             if listing.state != 'draft':
-                raise UserError(_(
+                tools.raise_bilingual_user_error(
                     "Only draft listings can be published. Listing %(listing)s is currently %(state)s.",
+                    "يمكن نشر الإعلانات في حالة المسودة فقط. الإعلان %(listing)s في حالة %(state)s.",
                     listing=listing.name,
-                    state=dict(listing._fields['state']._description_selection(listing.env)).get(listing.state),
-                ))
+                    state=listing._selection_label('state'),
+                )
             rofr_deadline = fields.Date.context_today(listing) + timedelta(days=ROFR_PUBLISH_DAYS)
             listing.write({
                 'state': 'published',
                 'rofr_deadline': rofr_deadline,
             })
             listing.message_post(body=_(
-                "Listing published on the Al Tahtheeb equity marketplace. "
-                "ROFR window ends on %(deadline)s.",
-                deadline=rofr_deadline,
+                "%(english)s\n\n%(arabic)s",
+                english=_(
+                    "Listing published on the Al Tahtheeb equity marketplace. "
+                    "ROFR window ends on %(deadline)s.",
+                    deadline=rofr_deadline,
+                ),
+                arabic=_(
+                    "تم نشر الإعلان في سوق التداول الداخلي لشركة التحذيب. "
+                    "تنتهي فترة حق الأولوية في الشراء في %(deadline)s.",
+                    deadline=rofr_deadline,
+                ),
             ))
         return True
 
     def action_match_listing(self, buyer_or_seller_id):
         """Link a counterparty and move the listing to the matched state."""
-        counterparty = self.env['res.partner'].browse(buyer_or_seller_id)
-        if not counterparty.exists():
-            raise UserError(_("The selected counterparty does not exist."))
+        counterparty = self.env['res.partner'].browse(buyer_or_seller_id).exists()
+        if not counterparty:
+            tools.raise_bilingual_user_error(
+                "The selected counterparty does not exist.",
+                "الطرف المقابل المحدد غير موجود.",
+            )
 
         for listing in self:
             if listing.state != 'published':
-                raise UserError(_(
+                tools.raise_bilingual_user_error(
                     "Only published listings can be matched. Listing %(listing)s is currently %(state)s.",
+                    "يمكن مطابقة الإعلانات المنشورة فقط. الإعلان %(listing)s في حالة %(state)s.",
                     listing=listing.name,
-                    state=dict(listing._fields['state']._description_selection(listing.env)).get(listing.state),
-                ))
+                    state=listing._selection_label('state'),
+                )
             if listing.shareholder_id == counterparty:
-                raise UserError(_(
-                    "The counterparty must be different from the listing shareholder."
-                ))
+                tools.raise_bilingual_user_error(
+                    "The counterparty must be different from the listing shareholder.",
+                    "يجب أن يكون الطرف المقابل مختلفاً عن المساهم صاحب الإعلان.",
+                )
             listing.write({
                 'matched_partner_id': counterparty.id,
                 'state': 'matched',
             })
             listing.message_post(body=_(
-                "Listing matched with counterparty %(partner)s.",
-                partner=counterparty.display_name,
+                "%(english)s\n\n%(arabic)s",
+                english=_(
+                    "Listing matched with counterparty %(partner)s.",
+                    partner=counterparty.display_name,
+                ),
+                arabic=_(
+                    "تمت مطابقة الإعلان مع الطرف المقابل %(partner)s.",
+                    partner=counterparty.display_name,
+                ),
             ))
         return True
 
     def _get_equity_company_partner(self):
         """Resolve the cap-table company partner linked to this listing."""
         self.ensure_one()
+        # equity.cap.table is a readonly SQL view; sudo is required for stable lookup.
         CapTable = self.env['equity.cap.table'].sudo()
-        base_domain = [
+        domain = [
             ('security_class_id', '=', self.share_class_id.id),
             ('securities_type', '=', 'shares'),
         ]
         if self.listing_type == 'sell':
-            entry = CapTable.search(
-                base_domain + [('holder_id', '=', self.shareholder_id.id)],
-                limit=1,
-            )
-        else:
-            entry = CapTable.search(base_domain, limit=1)
-
+            domain.append(('holder_id', '=', self.shareholder_id.id))
+        entry = CapTable.search(domain, limit=1)
         if entry:
             return entry.partner_id
 
@@ -231,18 +275,20 @@ class EquityMarketplaceBoard(models.Model):
         if company_partner.is_company:
             return company_partner
 
-        raise UserError(_(
+        tools.raise_bilingual_user_error(
             "Unable to determine the equity company partner for listing %(listing)s.",
+            "تعذر تحديد شريك شركة الأسهم للإعلان %(listing)s.",
             listing=self.name,
-        ))
+        )
 
     def _create_equity_transaction_from_match(self):
         """Create a draft equity.transaction from a matched marketplace listing."""
         self.ensure_one()
         if self.state != 'matched' or not self.matched_partner_id:
-            raise UserError(_(
-                "An equity transaction can only be created from a matched listing."
-            ))
+            tools.raise_bilingual_user_error(
+                "An equity transaction can only be created from a matched listing.",
+                "يمكن إنشاء معاملة الأسهم فقط من إعلان تمت مطابقته.",
+            )
         if self.equity_transaction_id:
             return self.equity_transaction_id
 
@@ -254,7 +300,13 @@ class EquityMarketplaceBoard(models.Model):
             buyer = self.shareholder_id
 
         equity_company = self._get_equity_company_partner()
-        transaction = self.env['equity.transaction'].sudo().create({
+        transaction_env = self.env['equity.transaction']
+        if self.env.user.has_group('base.group_portal'):
+            # Portal users have no direct create rights on equity.transaction.
+            transaction_env = transaction_env.sudo()
+
+        notice_date = fields.Date.to_date(self.create_date) if self.create_date else fields.Date.context_today(self)
+        transaction = transaction_env.create({
             'partner_id': equity_company.id,
             'transaction_type': 'transfer',
             'seller_id': seller.id,
@@ -265,26 +317,124 @@ class EquityMarketplaceBoard(models.Model):
             'company_id': self.company_id.id,
             'state': 'draft',
             'marketplace_listing_id': self.id,
-            'rofr_notice_date': self.create_date.date() if self.create_date else fields.Date.context_today(self),
+            'rofr_notice_date': notice_date,
         })
-        self.equity_transaction_id = transaction.id
+        self.write({'equity_transaction_id': transaction.id})
         self.message_post(body=_(
-            "Equity transfer transaction %(transaction)s created from marketplace listing.",
-            transaction=transaction.display_name,
+            "%(english)s\n\n%(arabic)s",
+            english=_(
+                "Equity transfer transaction %(transaction)s created from marketplace listing.",
+                transaction=transaction.display_name,
+            ),
+            arabic=_(
+                "تم إنشاء معاملة نقل أسهم %(transaction)s من إعلان السوق.",
+                transaction=transaction.display_name,
+            ),
         ))
         transaction.message_post(body=_(
-            "Created from marketplace listing %(listing)s.",
-            listing=self.name,
+            "%(english)s\n\n%(arabic)s",
+            english=_(
+                "Created from marketplace listing %(listing)s.",
+                listing=self.name,
+            ),
+            arabic=_(
+                "تم الإنشاء من إعلان السوق %(listing)s.",
+                listing=self.name,
+            ),
         ))
         _logger.info(
-            "Marketplace listing %s matched; equity.transaction %s created.",
+            _("Marketplace listing %s matched; equity.transaction %s created."),
             self.name,
             transaction.id,
         )
         return transaction
 
+    def _check_portal_match_allowed(self, counterparty):
+        """Validate portal-side business rules before elevated writes."""
+        self.ensure_one()
+        self.check_access('read')
+
+        if self.state != 'published':
+            tools.raise_bilingual_access_error(
+                "This marketplace listing is no longer available.",
+                "لم يعد إعلان السوق هذا متاحاً.",
+            )
+        if self.shareholder_id == counterparty:
+            tools.raise_bilingual_access_error(
+                "You cannot match your own marketplace listing.",
+                "لا يمكنك مطابقة إعلانك الخاص في السوق.",
+            )
+        if self.rofr_deadline and fields.Date.context_today(self) < self.rofr_deadline:
+            tools.raise_bilingual_user_error(
+                "The Right of First Refusal (ROFR) window is still open for this listing.",
+                "لا تزال فترة حق الأولوية في الشراء (ROFR) سارية لهذا الإعلان.",
+            )
+        if self.listing_type != 'sell':
+            tools.raise_bilingual_user_error(
+                "Only sell offers can receive buy proposals from the portal.",
+                "يمكن تقديم عروض الشراء من البوابة على إعلانات البيع فقط.",
+            )
+
     def action_portal_match_and_create_transaction(self, counterparty_id):
         """Match a listing with a portal counterparty and spawn the equity transaction."""
         self.ensure_one()
-        self.action_match_listing(counterparty_id)
-        return self._create_equity_transaction_from_match()
+        counterparty = self.env['res.partner'].browse(counterparty_id).exists()
+        if not counterparty:
+            tools.raise_bilingual_user_error(
+                "The selected counterparty does not exist.",
+                "الطرف المقابل المحدد غير موجود.",
+            )
+
+        self._check_portal_match_allowed(counterparty)
+        with self.env.cr.savepoint():
+            self.action_match_listing(counterparty.id)
+            return self._create_equity_transaction_from_match()
+
+    def _release_after_stale_signature(self, stale_days, transaction=None):
+        """Return a locked listing to the marketplace after a stale Sign request expires."""
+        self.ensure_one()
+        if self.state not in ('matched', 'approved', 'sign_process'):
+            return False
+
+        self.write({
+            'state': 'published',
+            'matched_partner_id': False,
+            'equity_transaction_id': False,
+        })
+        self.message_post(body=_(
+            "%(english)s\n\n%(arabic)s",
+            english=_(
+                "Marketplace listing %(listing)s was released back to published status "
+                "because the linked signature request on transaction %(transaction)s "
+                "expired after %(days)s days without completion.",
+                listing=self.name,
+                transaction=transaction.display_name if transaction else _('N/A'),
+                days=stale_days,
+            ),
+            arabic=_(
+                "أُعيد إعلان السوق %(listing)s إلى حالة المنشور لانتهاء طلب التوقيع "
+                "المرتبط بالمعاملة %(transaction)s بعد %(days)s يوماً دون إتمام.",
+                listing=self.name,
+                transaction=transaction.display_name if transaction else _('N/A'),
+                days=stale_days,
+            ),
+        ))
+        return True
+
+    def _schedule_stale_signature_admin_activity(self, summary):
+        """Create a backend todo for equity trading managers on this listing."""
+        activity_type = self.env.ref('mail.mail_activity_data_warning', raise_if_not_found=False)
+        if not activity_type:
+            activity_type = self.env.ref('mail.mail_activity_data_todo')
+
+        manager_group = self.env.ref(
+            'ics_altahtheeb_equity_trading.group_equity_trading_manager',
+            raise_if_not_found=False,
+        )
+        users = manager_group.users if manager_group else self.env.ref('base.user_root')
+        for user in users:
+            self.activity_schedule(
+                activity_type_id=activity_type.id,
+                summary=summary,
+                user_id=user.id,
+            )

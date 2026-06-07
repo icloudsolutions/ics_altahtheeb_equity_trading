@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
+
+from . import tools
 
 
 class ResCompany(models.Model):
@@ -34,3 +37,33 @@ class ResCompany(models.Model):
         default=1,
         help="Highest permitted votes-per-share weight for any equity class under company bylaws.",
     )
+
+    @api.constrains(
+        'saudi_cjsc_min_shareholders',
+        'equity_rofr_window_days',
+        'equity_max_ownership_pct',
+        'equity_max_voting_power_pct',
+        'equity_max_votes_per_share',
+    )
+    def _check_equity_governance_values(self):
+        for company in self:
+            if company.saudi_cjsc_min_shareholders < 2:
+                raise ValidationError(_(
+                    "Saudi CJSC minimum shareholders must be at least 2."
+                ))
+            if company.equity_rofr_window_days <= 0:
+                raise ValidationError(_(
+                    "The ROFR window must be a strictly positive number of days."
+                ))
+            if not 0 < company.equity_max_ownership_pct <= 100:
+                raise ValidationError(_(
+                    "Maximum ownership concentration must be between 0 and 100."
+                ))
+            if not 0 < company.equity_max_voting_power_pct <= 100:
+                raise ValidationError(_(
+                    "Maximum voting power concentration must be between 0 and 100."
+                ))
+            if company.equity_max_votes_per_share <= 0:
+                raise ValidationError(_(
+                    "Maximum votes per share must be strictly positive."
+                ))

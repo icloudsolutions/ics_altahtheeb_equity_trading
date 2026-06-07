@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="equity_marketplace_board_rule_company" model="ir.rule">
+        <field name="name">Marketplace listing: multi-company</field>
+        <field name="model_id" ref="model_equity_marketplace_board"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="equity_marketplace_board_rule_portal_read_published" model="ir.rule">
+        <field name="name">Portal: read published marketplace listings only</field>
+        <field name="model_id" ref="model_equity_marketplace_board"/>
+        <field name="domain_force">[('state', '=', 'published')]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="equity_marketplace_board_rule_manager_all" model="ir.rule">
+        <field name="name">Marketplace manager: unrestricted within company</field>
+        <field name="model_id" ref="model_equity_marketplace_board"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_equity_trading_manager'))]"/>
+    </record>
+
+</odoo>
