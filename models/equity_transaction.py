@@ -91,6 +91,23 @@ class EquityTransaction(models.Model):
                     "returns to draft or cancelled."
                 ))
 
+    @api.constrains('sign_request_id')
+    def _check_unique_sign_request(self):
+        """Prevent two equity transactions from sharing the same sign.request."""
+        for transaction in self.filtered('sign_request_id'):
+            duplicates = self.search([
+                ('sign_request_id', '=', transaction.sign_request_id.id),
+                ('id', '!=', transaction.id),
+            ])
+            if duplicates:
+                tools.raise_bilingual_validation(
+                    "Sign request \"%(request)s\" is already linked to another equity "
+                    "transaction. Each sign envelope must be unique.",
+                    "طلب التوقيع \"%(request)s\" مرتبط بالفعل بمعاملة أسهم أخرى. "
+                    "يجب أن يكون كل مظروف توقيع فريداً.",
+                    request=transaction.sign_request_id.display_name,
+                )
+
     def _cap_table_exclude_id(self):
         """Return a persisted id for cap-table simulation, avoiding transient NewId values."""
         self.ensure_one()

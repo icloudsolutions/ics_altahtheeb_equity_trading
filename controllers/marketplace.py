@@ -18,9 +18,7 @@ class AltahtheebEquityMarketplacePortal(AltahtheebEquityTradingPortal):
         partner = request.env.user.partner_id
         Listing = request.env['equity.marketplace.board']
 
-        listings = Listing.search([
-            ('state', '=', 'published'),
-        ], order='rofr_deadline asc, create_date desc')
+        listings = Listing.get_published_listings()
 
         listing_type_labels = dict(
             Listing._fields['listing_type']._description_selection(request.env)
@@ -105,12 +103,18 @@ class AltahtheebEquityMarketplacePortal(AltahtheebEquityTradingPortal):
         sitemap=False,
     )
     def portal_equity_marketplace(self, **kw):
-        flash = self._get_marketplace_flash_messages()
-        values = self._prepare_marketplace_values(**flash)
-        return request.render(
-            'ics_altahtheeb_equity_trading.marketplace_dashboard_view',
-            values,
-        )
+        try:
+            flash = self._get_marketplace_flash_messages()
+            values = self._prepare_marketplace_values(**flash)
+            return request.render(
+                'ics_altahtheeb_equity_trading.marketplace_dashboard_view',
+                values,
+            )
+        except AccessError:
+            return request.redirect('/web/login?redirect=/my/equity/marketplace')
+        except Exception:
+            _logger.exception('Unexpected error rendering equity marketplace dashboard.')
+            return request.render('website.page_500', {}, status=500)
 
     @http.route(
         '/my/equity/marketplace/match/<int:listing_id>',
@@ -131,7 +135,7 @@ class AltahtheebEquityMarketplacePortal(AltahtheebEquityTradingPortal):
             listing.check_access('read')
         except AccessError:
             _logger.warning(
-                _("Portal marketplace access denied for user partner %s on listing %s."),
+                'Portal marketplace access denied for user partner %s on listing %s.',
                 partner.id,
                 listing_id,
             )
@@ -144,6 +148,24 @@ class AltahtheebEquityMarketplacePortal(AltahtheebEquityTradingPortal):
             return request.redirect('/my/equity/marketplace?error=access')
         except (UserError, ValidationError) as error:
             request.session['marketplace_error'] = error.args[0] if error.args else str(error)
+            return request.redirect('/my/equity/marketplace?error=1')
+        except Exception:
+            _logger.exception(
+                'Unexpected error matching marketplace listing %s for partner %s.',
+                listing_id,
+                partner.id,
+            )
+            request.session['marketplace_error'] = _(
+                "%(english)s\n\n%(arabic)s",
+                english=_(
+                    "An unexpected error occurred while processing your buy proposal. "
+                    "Please try again or contact support."
+                ),
+                arabic=_(
+                    "حدث خطأ غير متوقع أثناء معالجة عرض الشراء. "
+                    "يرجى المحاولة مرة أخرى أو التواصل مع الدعم."
+                ),
+            )
             return request.redirect('/my/equity/marketplace?error=1')
 
         return request.redirect('/my/equity/marketplace?success=1')

@@ -9,9 +9,13 @@
     </record>
 
     <record id="equity_marketplace_board_rule_portal_read_published" model="ir.rule">
-        <field name="name">Portal: read published marketplace listings only</field>
+        <field name="name">Portal: marketplace listings for stakeholders</field>
         <field name="model_id" ref="model_equity_marketplace_board"/>
-        <field name="domain_force">[('state', '=', 'published')]</field>
+        <field name="domain_force">['|', '|',
+            ('state', '=', 'published'),
+            ('shareholder_id', '=', user.partner_id.id),
+            ('matched_partner_id', '=', user.partner_id.id)
+        ]</field>
         <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="False"/>

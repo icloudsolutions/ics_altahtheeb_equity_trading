@@ -228,8 +228,14 @@ class AltahtheebEquityTradingPortal(PortalEquity):
         sitemap=False,
     )
     def portal_equity_portfolio(self, **kw):
-        values = self._prepare_portfolio_dashboard_values()
-        return request.render(
-            'ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view',
-            values,
-        )
+        try:
+            values = self._prepare_portfolio_dashboard_values()
+            return request.render(
+                'ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view',
+                values,
+            )
+        except AccessError:
+            return request.redirect('/web/login?redirect=/my/equity/portfolio')
+        except Exception:
+            _logger.exception('Unexpected error rendering equity portfolio dashboard.')
+            return request.render('website.page_500', {}, status=500)

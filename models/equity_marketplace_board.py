@@ -20,6 +20,10 @@ class EquityMarketplaceBoard(models.Model):
     _order = 'create_date desc, id desc'
     _rec_name = 'name'
 
+    @api.model
+    def _default_company(self):
+        return self.env.company
+
     name = fields.Char(
         string="Listing ID",
         required=True,
@@ -103,7 +107,7 @@ class EquityMarketplaceBoard(models.Model):
     company_id = fields.Many2one(
         comodel_name='res.company',
         string="Company",
-        default=lambda self: self.env.company,
+        default=_default_company,
         required=True,
         index=True,
     )
@@ -217,6 +221,12 @@ class EquityMarketplaceBoard(models.Model):
             ))
         return True
 
+    @api.model
+    def get_published_listings(self, limit=None, order='rofr_deadline asc, create_date desc'):
+        """Return published listings using a clean domain (portal-safe API)."""
+        domain = [('state', '=', 'published')]
+        return self.search(domain, limit=limit, order=order)
+
     def action_match_listing(self, buyer_or_seller_id):
         """Link a counterparty and move the listing to the matched state."""
         counterparty = self.env['res.partner'].browse(buyer_or_seller_id).exists()
@@ -226,23 +236,26 @@ class EquityMarketplaceBoard(models.Model):
                 "الطرف المقابل المحدد غير موجود.",
             )
 
+        invalid_state = self.filtered(lambda listing: listing.state != 'published')
+        if invalid_state:
+            listing = invalid_state[0]
+            tools.raise_bilingual_user_error(
+                "Only published listings can be matched. Listing %(listing)s is currently %(state)s.",
+                "يمكن مطابقة الإعلانات المنشورة فقط. الإعلان %(listing)s في حالة %(state)s.",
+                listing=listing.name,
+                state=listing._selection_label('state'),
+            )
+        if self.filtered(lambda listing: listing.shareholder_id == counterparty):
+            tools.raise_bilingual_user_error(
+                "The counterparty must be different from the listing shareholder.",
+                "يجب أن يكون الطرف المقابل مختلفاً عن المساهم صاحب الإعلان.",
+            )
+
+        self.write({
+            'matched_partner_id': counterparty.id,
+            'state': 'matched',
+        })
         for listing in self:
-            if listing.state != 'published':
-                tools.raise_bilingual_user_error(
-                    "Only published listings can be matched. Listing %(listing)s is currently %(state)s.",
-                    "يمكن مطابقة الإعلانات المنشورة فقط. الإعلان %(listing)s في حالة %(state)s.",
-                    listing=listing.name,
-                    state=listing._selection_label('state'),
-                )
-            if listing.shareholder_id == counterparty:
-                tools.raise_bilingual_user_error(
-                    "The counterparty must be different from the listing shareholder.",
-                    "يجب أن يكون الطرف المقابل مختلفاً عن المساهم صاحب الإعلان.",
-                )
-            listing.write({
-                'matched_partner_id': counterparty.id,
-                'state': 'matched',
-            })
             listing.message_post(body=_(
                 "%(english)s\n\n%(arabic)s",
                 english=_(
@@ -386,9 +399,11 @@ class EquityMarketplaceBoard(models.Model):
             )
 
         self._check_portal_match_allowed(counterparty)
+        # Portal users have read-only ACL on listings; elevate narrowly after validation.
+        listing = self.sudo() if self.env.user.has_group('base.group_portal') else self
         with self.env.cr.savepoint():
-            self.action_match_listing(counterparty.id)
-            return self._create_equity_transaction_from_match()
+            listing.action_match_listing(counterparty.id)
+            return listing._create_equity_transaction_from_match()
 
     def _release_after_stale_signature(self, stale_days, transaction=None):
         """Return a locked listing to the marketplace after a stale Sign request expires."""

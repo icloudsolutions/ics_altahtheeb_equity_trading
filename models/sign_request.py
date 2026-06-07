@@ -3,6 +3,7 @@
 import logging
 
 from odoo import _, models
+from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
 
@@ -36,10 +37,18 @@ class SignRequest(models.Model):
         if not sign_requests:
             return
 
-        transactions = self.env['equity.transaction'].search([
-            ('sign_request_id', 'in', sign_requests.ids),
-            ('state', '=', 'waiting_signature'),
-        ])
+        try:
+            transactions = self.env['equity.transaction'].search([
+                ('sign_request_id', 'in', sign_requests.ids),
+                ('state', '=', 'waiting_signature'),
+            ])
+        except AccessError:
+            _logger.warning(
+                'Access denied while resolving equity transactions for sign.request %s.',
+                sign_requests.ids,
+            )
+            return
+
         if not transactions:
             return
 
