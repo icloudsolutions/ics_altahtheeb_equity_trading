@@ -11,4 +11,41 @@
               action="equity_marketplace_board_action"
               sequence="10"/>
 
+    <menuitem id="menu_equity_portfolio_asset"
+              name="Portfolio Assets"
+              parent="menu_ics_altahtheeb_equity_trading_root"
+              action="equity_portfolio_asset_action"
+              sequence="20"/>
+
+    <menuitem id="menu_equity_portfolio_asset_zakat_report"
+              name="Zakat Asset Valuation"
+              parent="menu_ics_altahtheeb_equity_trading_root"
+              action="equity_portfolio_asset_zakat_report_action"
+              sequence="22"/>
+
+    <menuitem id="menu_equity_investment_fund"
+              name="Investment Funds"
+              parent="menu_ics_altahtheeb_equity_trading_root"
+              action="equity_investment_fund_action"
+              sequence="25"/>
+
+    <menuitem id="menu_equity_portfolio_revaluation"
+              name="Portfolio Revaluations"
+              parent="menu_ics_altahtheeb_equity_trading_root"
+              action="equity_portfolio_revaluation_action"
+              sequence="30"/>
+
+    <menuitem id="menu_equity_trade_order"
+              name="Trade Orders"
+              parent="menu_ics_altahtheeb_equity_trading_root"
+              action="equity_trade_order_action"
+              sequence="40"/>
+
+    <menuitem id="menu_equity_trade_audit_log"
+              name="Trade Audit Logs"
+              parent="menu_ics_altahtheeb_equity_trading_root"
+              action="equity_trade_audit_log_action"
+              sequence="50"
+              groups="group_equity_trading_manager"/>
+
 </odoo>

@@ -57,4 +57,36 @@
         <field name="active" eval="True"/>
     </record>
 
+    <record id="ir_cron_sync_market_feed_prices" model="ir.cron">
+        <field name="name">Al Tahtheeb Equity: Sync Market Feed Prices</field>
+        <field name="model_id" ref="model_equity_portfolio_asset"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_sync_market_feed_prices()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">15</field>
+        <field name="interval_type">minutes</field>
+        <field name="nextcall" eval="(DateTime.now() + timedelta(minutes=15)).replace(second=0, microsecond=0)"/>
+        <field name="priority">20</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <!--
+        Period-end fair-value revaluation.
+        Schedule this cron to run on your fiscal period-end date (e.g. last day
+        of the month or quarter).  It creates draft journal entries only; an
+        accountant must review and post them in Accounting.
+    -->
+    <record id="ir_cron_post_period_end_revaluations" model="ir.cron">
+        <field name="name">Al Tahtheeb Equity: Period-End Portfolio Revaluation</field>
+        <field name="model_id" ref="model_equity_portfolio_revaluation"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_post_period_end_revaluations()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).replace(hour=3, minute=0, second=0, microsecond=0)"/>
+        <field name="priority">18</field>
+        <field name="active" eval="True"/>
+    </record>
+
 </odoo>

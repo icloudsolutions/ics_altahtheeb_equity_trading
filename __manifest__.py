@@ -13,12 +13,15 @@ e-signatures (Sign) and stakeholder self-service on the website portal.
     'author': 'iCloud Solutions',
     'license': 'OEEL-1',
     'depends': [
+        'account',
         'equity',
         'sign',
         'website',
     ],
     'data': [
         'data/equity_marketplace_sequence.xml',
+        'data/equity_revaluation_sequence.xml',
+        'data/equity_trade_sequence.xml',
         'data/ir_config_parameter_data.xml',
         'data/ir_cron_data.xml',
         # Security
@@ -27,6 +30,12 @@ e-signatures (Sign) and stakeholder self-service on the website portal.
         'security/ir.model.access.csv',
         # Backend views
         'views/ics_altahtheeb_equity_trading_views.xml',
+        'views/equity_investment_fund_views.xml',
+        'views/equity_security_class_views.xml',
+        'views/equity_portfolio_asset_zakat_views.xml',
+        'views/equity_portfolio_revaluation_views.xml',
+        'views/equity_trade_order_views.xml',
+        'views/equity_transaction_disposal_views.xml',
         'views/ics_altahtheeb_equity_trading_menus.xml',
         # Portal / website templates
         'views/ics_altahtheeb_equity_trading_portal_templates.xml',

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+from functools import partial
 
 from odoo import _, fields, http
 from odoo.exceptions import AccessError, UserError, ValidationError
@@ -35,6 +36,8 @@ class AltahtheebEquityMarketplacePortal(AltahtheebEquityTradingPortal):
                 amount,
                 currency,
             ),
+            'fmt_date': partial(format_date, request.env),
+            'split_bilingual_message': AltahtheebEquityTradingPortal._split_bilingual_message,
             'today': fields.Date.context_today(Listing),
         }
         values.update(extra_values)

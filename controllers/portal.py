@@ -58,9 +58,10 @@ class AltahtheebEquityTradingPortal(PortalEquity):
         signalling that the partner has completed transaction history to review.
         """
         values = super()._prepare_home_portal_values(counters)
+        partner_id = self._resolve_portal_partner_id()
+        Transaction = request.env['equity.transaction']
+
         if 'portfolio_count' in counters:
-            partner_id = self._resolve_portal_partner_id()
-            Transaction = request.env['equity.transaction']
             values['portfolio_count'] = (
                 Transaction.search_count(
                     self._build_completed_transactions_domain(partner_id),
@@ -69,7 +70,29 @@ class AltahtheebEquityTradingPortal(PortalEquity):
                 if partner_id and Transaction.has_access('read')
                 else 0
             )
+        if 'marketplace_count' in counters:
+            Listing = request.env['equity.marketplace.board']
+            values['marketplace_count'] = (
+                Listing.search_count([('state', '=', 'published')], limit=1)
+                if Listing.has_access('read')
+                else 0
+            )
+        if 'pending_signature_count' in counters:
+            values['pending_signature_count'] = (
+                len(self._build_pending_signature_rows(
+                    request.env.user.partner_id,
+                ))
+                if partner_id and Transaction.has_access('read')
+                else 0
+            )
         return values
+
+    @staticmethod
+    def _split_bilingual_message(message):
+        """Split bilingual EN/AR portal messages into display paragraphs."""
+        if not message:
+            return []
+        return [part.strip() for part in message.split('\n\n') if part.strip()]
 
     # -------------------------------------------------------------------------
     # Private helpers
@@ -214,6 +237,41 @@ class AltahtheebEquityTradingPortal(PortalEquity):
             })
         return rows
 
+    def _build_pending_signature_rows(self, partner):
+        """
+        Return equity transactions awaiting the portal partner's signature.
+
+        :param partner: ``res.partner`` browse record of the authenticated user.
+        :returns: list[dict]
+        """
+        if not partner:
+            return []
+
+        Transaction = request.env['equity.transaction']
+        if not Transaction.has_access('read'):
+            return []
+
+        pending_transactions = Transaction.search([
+            ('state', '=', 'waiting_signature'),
+            '|',
+            ('seller_id', '=', partner.id),
+            ('subscriber_id', '=', partner.id),
+        ], order='date desc, id desc')
+
+        rows = []
+        for tx in pending_transactions:
+            sign_url = self._get_transaction_sign_url(tx, partner)
+            if not sign_url:
+                continue
+            rows.append({
+                'id': tx.id,
+                'reference': tx.display_name,
+                'share_class': tx.security_class_id.display_name or '—',
+                'date': tx.date,
+                'sign_url': sign_url,
+            })
+        return rows
+
     # -------------------------------------------------------------------------
     # Portfolio dashboard value builder
     # -------------------------------------------------------------------------
@@ -264,6 +322,7 @@ class AltahtheebEquityTradingPortal(PortalEquity):
             order='date desc, id desc',
         )
         transaction_rows = self._build_transaction_rows(completed_transactions, partner_id)
+        pending_signature_rows = self._build_pending_signature_rows(partner)
 
         # ------------------------------------------------------------------
         # Assemble context
@@ -283,6 +342,9 @@ class AltahtheebEquityTradingPortal(PortalEquity):
             # Share allocations table
             'share_class_rows': share_class_rows,
             'has_holdings': bool(share_class_rows),
+            # Pending signatures
+            'pending_signature_rows': pending_signature_rows,
+            'has_pending_signatures': bool(pending_signature_rows),
             # Transaction history table
             'transaction_rows': transaction_rows,
             'has_transactions': bool(transaction_rows),
@@ -387,6 +449,7 @@ class AltahtheebEquityTradingPortal(PortalEquity):
             'transaction': transaction,
             'sign_request': transaction.sign_request_id,
             'sign_url': sign_url,
+            'fmt_date': partial(format_date, request.env),
         }
         return request.render(
             'ics_altahtheeb_equity_trading.portal_sign_iframe_view',

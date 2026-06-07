@@ -24,8 +24,50 @@
                                               equity transfer signatures.
     4. ``portal_portfolio_dashboard_view``   — My Portfolio Dashboard (this PR).
     5. ``marketplace_dashboard_view``        — Active listing marketplace.
+    6. ``portal_breadcrumbs_equity_trading`` — breadcrumb trail extensions.
 -->
 <odoo>
+
+    <!-- ================================================================== -->
+    <!-- Reusable bilingual portal alert snippet                             -->
+    <!-- ================================================================== -->
+    <template id="portal_bilingual_alert_lines" name="Bilingual Portal Alert Lines">
+        <t t-foreach="message_lines" t-as="line">
+            <p t-attf-class="mb-0 #{'mt-2 text-muted' if line_index else ''}"
+               t-esc="line"/>
+        </t>
+    </template>
+
+
+    <!-- ================================================================== -->
+    <!-- Portal breadcrumb extensions                                        -->
+    <!-- ================================================================== -->
+    <template id="portal_breadcrumbs_equity_trading"
+              name="Portal layout: Al Tahtheeb Equity Trading"
+              inherit_id="portal.portal_breadcrumbs"
+              priority="35">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name in ('equity_portfolio', 'equity_marketplace', 'equity_sign')"
+                class="breadcrumb-item">
+                <a href="/my/equity">Equity Dashboard</a>
+            </li>
+            <li t-if="page_name == 'equity_portfolio'"
+                class="breadcrumb-item active"
+                aria-current="page">
+                My Portfolio
+            </li>
+            <li t-if="page_name == 'equity_marketplace'"
+                class="breadcrumb-item active"
+                aria-current="page">
+                Marketplace
+            </li>
+            <li t-if="page_name == 'equity_sign'"
+                class="breadcrumb-item active"
+                aria-current="page">
+                Sign Document
+            </li>
+        </xpath>
+    </template>
 
     <!-- ================================================================== -->
     <!-- 1. Parent grouping template                                         -->
@@ -54,11 +96,20 @@
 
         <div id="portal_service_category" position="inside">
             <t t-call="portal.portal_docs_entry">
-                <t t-set="icon">/equity/static/src/img/equity.svg</t>
+                <t t-set="icon" t-value="'/equity/static/src/img/equity.svg'"/>
                 <t t-set="title">My Portfolio</t>
                 <t t-set="url" t-value="'/my/equity/portfolio'"/>
                 <t t-set="text">Review your shareholdings and completed trade history</t>
                 <t t-set="placeholder_count" t-value="'portfolio_count'"/>
+                <t t-set="config_card" t-value="True"/>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/equity/static/src/img/equity.svg'"/>
+                <t t-set="title">Share Marketplace</t>
+                <t t-set="url" t-value="'/my/equity/marketplace'"/>
+                <t t-set="text">Browse published listings and submit buy proposals</t>
+                <t t-set="placeholder_count" t-value="'marketplace_count'"/>
+                <t t-set="config_card" t-value="True"/>
             </t>
         </div>
     </template>
@@ -71,18 +122,19 @@
               name="Al Tahtheeb Equity — Sign Iframe">
         <t t-call="portal.portal_layout">
             <t t-set="additional_title">Sign Equity Transaction</t>
+            <t t-set="page_name">equity_sign</t>
 
             <div class="o_portal_wrap">
                 <div class="container py-4">
 
                     <!-- Breadcrumb -->
-                    <nav aria-label="breadcrumb" class="mb-4">
+                    <nav aria-label="breadcrumb" class="mb-4 d-md-none">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item">
                                 <a href="/my/home" class="text-decoration-none">My Account</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/my/equity" class="text-decoration-none">Equity Dashboard</a>
+                                <a href="/my/equity/portfolio" class="text-decoration-none">My Portfolio</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
                                 Sign Document
@@ -93,15 +145,25 @@
                     <!-- Sign card -->
                     <div class="card border-0 shadow-sm">
                         <div class="card-header bg-white border-bottom py-3 px-4">
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- pen icon from Bootstrap Icons (bundled with Odoo 19) -->
-                                <span class="text-primary fs-4" aria-hidden="true">✍</span>
-                                <div>
-                                    <h1 class="h5 fw-semibold mb-1">Share Transfer Agreement</h1>
-                                    <p class="text-muted small mb-0">
-                                        <t t-esc="sign_request.reference"/>
-                                    </p>
+                            <div class="d-flex flex-column flex-md-row
+                                        justify-content-between align-items-md-center gap-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="text-primary fs-4" aria-hidden="true">✍</span>
+                                    <div>
+                                        <h1 class="h5 fw-semibold mb-1">Share Transfer Agreement</h1>
+                                        <p class="text-muted small mb-0">
+                                            <t t-esc="sign_request.reference"/>
+                                        </p>
+                                        <p class="text-muted small mb-0">
+                                            Transaction:
+                                            <strong t-esc="transaction.display_name"/>
+                                        </p>
+                                    </div>
                                 </div>
+                                <a href="/my/equity/portfolio"
+                                   class="btn btn-outline-secondary btn-sm flex-shrink-0">
+                                    Back to Portfolio
+                                </a>
                             </div>
                         </div>
                         <div class="card-body p-0">
@@ -109,8 +171,18 @@
                                     width="100%"
                                     height="750"
                                     title="Electronic Signature — Share Transfer Agreement"
-                                    class="d-block w-100 border-0"
+                                    class="d-block w-100 border-0 o_portal_sign_iframe"
+                                    loading="lazy"
                                     allow="clipboard-read; clipboard-write"/>
+                        </div>
+                        <div class="card-footer bg-white border-top py-3 px-4">
+                            <p class="text-muted small mb-0">
+                                Your cryptographic signature is processed securely by Odoo Sign.
+                                <t t-if="transaction.date">
+                                    Transaction date:
+                                    <strong t-esc="fmt_date(transaction.date)"/>.
+                                </t>
+                            </p>
                         </div>
                     </div>
 
@@ -148,14 +220,15 @@
               name="My Portfolio Dashboard">
         <t t-call="portal.portal_layout">
             <t t-set="additional_title">My Portfolio Dashboard</t>
+            <t t-set="page_name">equity_portfolio</t>
 
             <div class="o_portal_wrap bg-light">
                 <div class="container-fluid container-lg py-4 px-3 px-md-4">
 
                     <!-- -------------------------------------------------- -->
-                    <!-- Breadcrumb                                            -->
+                    <!-- Breadcrumb (mobile fallback; desktop uses portal layout) -->
                     <!-- -------------------------------------------------- -->
-                    <nav aria-label="breadcrumb" class="mb-4">
+                    <nav aria-label="breadcrumb" class="mb-4 d-md-none">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item">
                                 <a href="/my/home" class="text-decoration-none">My Account</a>
@@ -168,6 +241,63 @@
                             </li>
                         </ol>
                     </nav>
+
+                    <!-- Pending signature actions -->
+                    <t t-if="has_pending_signatures">
+                        <div class="alert alert-warning border-0 shadow-sm mb-4"
+                             role="alert"
+                             aria-live="polite">
+                            <div class="d-flex flex-column flex-md-row
+                                        justify-content-between align-items-md-center gap-3">
+                                <div>
+                                    <h2 class="h6 fw-semibold mb-2">
+                                        Action Required — Pending Signatures
+                                    </h2>
+                                    <p class="mb-0 small">
+                                        You have
+                                        <strong t-esc="len(pending_signature_rows)"/>
+                                        equity transfer(s) awaiting your electronic signature.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="table-responsive mt-3">
+                                <table class="table table-sm align-middle mb-0 bg-white rounded">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Reference</th>
+                                            <th scope="col">Share Class</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col" class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="pending_signature_rows" t-as="pending">
+                                            <tr>
+                                                <td class="fw-semibold">
+                                                    <t t-esc="pending['reference']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="pending['share_class']"/>
+                                                </td>
+                                                <td class="text-muted">
+                                                    <t t-if="pending['date']">
+                                                        <t t-esc="fmt_date(pending['date'])"/>
+                                                    </t>
+                                                    <t t-else="">—</t>
+                                                </td>
+                                                <td class="text-end">
+                                                    <a t-att-href="pending['sign_url']"
+                                                       class="btn btn-warning btn-sm">
+                                                        Sign Now
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
 
                     <!-- -------------------------------------------------- -->
                     <!-- Page header card                                      -->
@@ -368,7 +498,14 @@
                                                     <t t-esc="total_shares"/>
                                                 </td>
                                                 <td class="pe-4 py-3 text-end fw-bold text-success">
-                                                    <t t-esc="fmt_amount(portfolio_valuation, display_currency)"/>
+                                                    <t t-if="has_mixed_currencies">
+                                                        <span class="text-muted fw-normal small">
+                                                            Mixed currencies
+                                                        </span>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-esc="fmt_amount(portfolio_valuation, display_currency)"/>
+                                                    </t>
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -507,12 +644,20 @@
                                                         <t t-esc="fmt_amount(row['unit_price'], row['currency'])"/>
                                                     </td>
 
-                                                    <!-- Ledger State — always green success badge -->
+                                                    <!-- Ledger State -->
                                                     <td class="pe-4 py-3 text-end">
-                                                        <span class="badge rounded-pill text-bg-success"
-                                                              t-att-title="row['state']">
-                                                            ✓ <t t-esc="row['state_label']"/>
-                                                        </span>
+                                                        <t t-if="row['state'] == 'signed_legal'">
+                                                            <span class="badge rounded-pill text-bg-success"
+                                                                  t-att-title="row['state']">
+                                                                ✓ <t t-esc="row['state_label']"/>
+                                                            </span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span class="badge rounded-pill text-bg-primary"
+                                                                  t-att-title="row['state']">
+                                                                ✓ <t t-esc="row['state_label']"/>
+                                                            </span>
+                                                        </t>
                                                     </td>
                                                 </tr>
                                             </t>
@@ -546,12 +691,13 @@
               name="Al Tahtheeb Marketplace Dashboard">
         <t t-call="portal.portal_layout">
             <t t-set="additional_title">Al Tahtheeb Internal Share Marketplace</t>
+            <t t-set="page_name">equity_marketplace</t>
 
             <div class="o_portal_wrap bg-light">
                 <div class="container-fluid container-lg py-4 px-3 px-md-4">
 
                     <!-- Breadcrumb -->
-                    <nav aria-label="breadcrumb" class="mb-4">
+                    <nav aria-label="breadcrumb" class="mb-4 d-md-none">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item">
                                 <a href="/my/home" class="text-decoration-none">My Account</a>
@@ -596,8 +742,11 @@
                     <!-- Flash messages -->
                     <t t-if="success_message">
                         <div class="alert alert-success alert-dismissible fade show mb-4"
-                             role="alert">
-                            <t t-esc="success_message"/>
+                             role="alert"
+                             aria-live="polite">
+                            <t t-set="message_lines"
+                               t-value="split_bilingual_message(success_message)"/>
+                            <t t-call="ics_altahtheeb_equity_trading.portal_bilingual_alert_lines"/>
                             <button type="button"
                                     class="btn-close"
                                     data-bs-dismiss="alert"
@@ -606,8 +755,11 @@
                     </t>
                     <t t-if="error_message">
                         <div class="alert alert-danger alert-dismissible fade show mb-4"
-                             role="alert">
-                            <t t-esc="error_message"/>
+                             role="alert"
+                             aria-live="polite">
+                            <t t-set="message_lines"
+                               t-value="split_bilingual_message(error_message)"/>
+                            <t t-call="ics_altahtheeb_equity_trading.portal_bilingual_alert_lines"/>
                             <button type="button"
                                     class="btn-close"
                                     data-bs-dismiss="alert"
@@ -648,6 +800,8 @@
                                                 <th scope="col"
                                                     class="ps-4 py-3 fw-semibold">Listing ID</th>
                                                 <th scope="col"
+                                                    class="py-3 fw-semibold">Seller</th>
+                                                <th scope="col"
                                                     class="py-3 fw-semibold">Share Class</th>
                                                 <th scope="col"
                                                     class="py-3 fw-semibold text-end">Total Shares</th>
@@ -670,9 +824,13 @@
                                                                   and listing.rofr_deadline >= today">
                                                             <span class="badge rounded-pill
                                                                          text-bg-warning mt-1">
-                                                                ROFR Notice Period Active
+                                                                ROFR until
+                                                                <t t-esc="fmt_date(listing.rofr_deadline)"/>
                                                             </span>
                                                         </t>
+                                                    </td>
+                                                    <td class="py-3 text-muted">
+                                                        <t t-esc="listing.shareholder_id.display_name"/>
                                                     </td>
                                                     <td class="py-3 text-muted">
                                                         <t t-esc="listing.share_class_id.display_name"/>
@@ -698,7 +856,8 @@
                                                             <t t-if="listing.rofr_deadline
                                                                       and listing.rofr_deadline > today">
                                                                 <span class="text-muted small">
-                                                                    Available after ROFR deadline
+                                                                    Available after
+                                                                    <t t-esc="fmt_date(listing.rofr_deadline)"/>
                                                                 </span>
                                                             </t>
                                                             <t t-else="">

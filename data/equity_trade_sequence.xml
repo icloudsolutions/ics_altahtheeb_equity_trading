@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="seq_equity_trade_order" model="ir.sequence">
+        <field name="name">Equity Trade Order</field>
+        <field name="code">equity.trade.order</field>
+        <field name="prefix">TRD-ORD-%(year)s-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="seq_equity_trade_audit_log" model="ir.sequence">
+        <field name="name">Equity Trade Audit Log</field>
+        <field name="code">equity.trade.audit.log</field>
+        <field name="prefix">TRD-AUD-%(year)s-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+</odoo>

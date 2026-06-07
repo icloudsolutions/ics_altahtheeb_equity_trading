@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="seq_equity_portfolio_revaluation" model="ir.sequence">
+        <field name="name">Equity Portfolio Revaluation</field>
+        <field name="code">equity.portfolio.revaluation</field>
+        <field name="prefix">REVAL-%(year)s-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+</odoo>

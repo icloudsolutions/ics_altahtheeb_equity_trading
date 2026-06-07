@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="equity_portfolio_asset_view_list_zakat" model="ir.ui.view">
+        <field name="name">equity.portfolio.asset.list.zakat</field>
+        <field name="model">equity.portfolio.asset</field>
+        <field name="inherit_id" ref="equity_portfolio_asset_view_list"/>
+        <field name="arch" type="xml">
+            <field name="investment_fund_id" position="after">
+                <field name="zakat_classification"/>
+                <field name="current_market_value" optional="show"/>
+                <field name="zakat_base_contribution_value" sum="Total Zakat Base"/>
+                <field name="zakat_deductible_value" optional="hide" sum="Total Deductible"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="equity_portfolio_asset_view_form_zakat" model="ir.ui.view">
+        <field name="name">equity.portfolio.asset.form.zakat</field>
+        <field name="model">equity.portfolio.asset</field>
+        <field name="inherit_id" ref="equity_portfolio_asset_view_form"/>
+        <field name="arch" type="xml">
+            <field name="current_book_value" position="after">
+                <field name="zakat_classification"/>
+                <field name="zakat_base_contribution_value"/>
+                <field name="zakat_deductible_value"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="equity_portfolio_asset_view_search_zakat" model="ir.ui.view">
+        <field name="name">equity.portfolio.asset.search.zakat</field>
+        <field name="model">equity.portfolio.asset</field>
+        <field name="arch" type="xml">
+            <search string="Portfolio Assets">
+                <field name="display_name"/>
+                <field name="share_class_id"/>
+                <field name="investment_fund_id"/>
+                <field name="zakat_classification"/>
+                <filter string="Trading (Short-term)"
+                        name="filter_zakat_trading"
+                        domain="[('zakat_classification', '=', 'short_term_trading')]"/>
+                <filter string="Strategic / Long-term"
+                        name="filter_zakat_strategic"
+                        domain="[('zakat_classification', '=', 'long_term_strategic')]"/>
+                <group>
+                    <filter string="Zakat Classification"
+                            name="group_zakat_classification"
+                            context="{'group_by': 'zakat_classification'}"/>
+                    <filter string="Investment Fund"
+                            name="group_investment_fund"
+                            context="{'group_by': 'investment_fund_id'}"/>
+                    <filter string="Share Class"
+                            name="group_share_class"
+                            context="{'group_by': 'share_class_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="equity_portfolio_asset_zakat_report_view_list" model="ir.ui.view">
+        <field name="name">equity.portfolio.asset.zakat.report.list</field>
+        <field name="model">equity.portfolio.asset</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <list string="Zakat Asset Valuation Report">
+                <field name="zakat_classification"/>
+                <field name="share_class_id"/>
+                <field name="investment_fund_id"/>
+                <field name="current_quantity"/>
+                <field name="market_price"/>
+                <field name="current_market_value" sum="Total Market Value"/>
+                <field name="current_book_value" sum="Total Book Value"/>
+                <field name="zakat_base_contribution_value" sum="Total Zakat Base Contribution"/>
+                <field name="zakat_deductible_value" sum="Total Zakat Deductible"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="equity_portfolio_asset_zakat_report_action" model="ir.actions.act_window">
+        <field name="name">Zakat Asset Valuation Report</field>
+        <field name="res_model">equity.portfolio.asset</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="equity_portfolio_asset_zakat_report_view_list"/>
+        <field name="search_view_id" ref="equity_portfolio_asset_view_search_zakat"/>
+        <field name="context">{'search_default_group_zakat_classification': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No portfolio holdings to value for Zakat
+            </p>
+            <p>
+                Trading holdings contribute fair market value to the Zakat base.
+                Strategic holdings are excluded from the base and may qualify
+                for separate deduction per GAZT/ZATCA rules.
+            </p>
+        </field>
+    </record>
+
+</odoo>

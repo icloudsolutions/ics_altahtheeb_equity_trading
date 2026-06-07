@@ -6,4 +6,24 @@
         <field name="value">5</field>
     </record>
 
+    <record id="config_market_feed_batch_size" model="ir.config_parameter">
+        <field name="key">ics_altahtheeb_equity_trading.market_feed_batch_size</field>
+        <field name="value">50</field>
+    </record>
+
+    <record id="config_market_feed_max_retries" model="ir.config_parameter">
+        <field name="key">ics_altahtheeb_equity_trading.market_feed_max_retries</field>
+        <field name="value">8</field>
+    </record>
+
+    <record id="config_market_feed_retry_base_minutes" model="ir.config_parameter">
+        <field name="key">ics_altahtheeb_equity_trading.market_feed_retry_base_minutes</field>
+        <field name="value">5</field>
+    </record>
+
+    <record id="config_audit_log_signature_secret" model="ir.config_parameter">
+        <field name="key">ics_altahtheeb_equity_trading.audit_log_signature_secret</field>
+        <field name="value">change-me-in-production</field>
+    </record>
+
 </odoo>

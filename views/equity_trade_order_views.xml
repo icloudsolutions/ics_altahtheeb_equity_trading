@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="equity_trade_order_view_list" model="ir.ui.view">
+        <field name="name">equity.trade.order.list</field>
+        <field name="model">equity.trade.order</field>
+        <field name="arch" type="xml">
+            <list string="Equity Trade Orders">
+                <field name="name"/>
+                <field name="transaction_date"/>
+                <field name="trade_side"/>
+                <field name="shareholder_id"/>
+                <field name="counterparty_id"/>
+                <field name="share_class_id"/>
+                <field name="quantity"/>
+                <field name="unit_price"/>
+                <field name="amount_total"/>
+                <field name="state" widget="badge"
+                       decoration-info="state in ('draft', 'pending')"
+                       decoration-success="state == 'posted'"
+                       decoration-warning="state == 'confirmed'"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="equity_trade_order_view_form" model="ir.ui.view">
+        <field name="name">equity.trade.order.form</field>
+        <field name="model">equity.trade.order</field>
+        <field name="arch" type="xml">
+            <form string="Equity Trade Order" create="0" delete="0">
+                <header>
+                    <button name="action_open_audit_logs"
+                            string="Audit Logs"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="audit_log_count == 0"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,pending,confirmed,posted"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_audit_logs"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-history"
+                                invisible="audit_log_count == 0">
+                            <field name="audit_log_count" widget="statinfo" string="Audit Logs"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="trade_side"/>
+                            <field name="transaction_date"/>
+                            <field name="shareholder_id"/>
+                            <field name="counterparty_id"/>
+                            <field name="share_class_id"/>
+                        </group>
+                        <group>
+                            <field name="quantity"/>
+                            <field name="unit_price"/>
+                            <field name="amount_total"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="equity_transaction_id"/>
+                            <field name="marketplace_listing_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="equity_trade_order_action" model="ir.actions.act_window">
+        <field name="name">Trade Orders</field>
+        <field name="res_model">equity.trade.order</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="equity_trade_audit_log_view_list" model="ir.ui.view">
+        <field name="name">equity.trade.audit.log.list</field>
+        <field name="model">equity.trade.audit.log</field>
+        <field name="arch" type="xml">
+            <list string="Equity Trade Audit Logs" create="0" delete="0" edit="0">
+                <field name="name"/>
+                <field name="create_date"/>
+                <field name="trade_order_id"/>
+                <field name="action"/>
+                <field name="user_id"/>
+                <field name="content_signature"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="equity_trade_audit_log_view_form" model="ir.ui.view">
+        <field name="name">equity.trade.audit.log.form</field>
+        <field name="model">equity.trade.audit.log</field>
+        <field name="arch" type="xml">
+            <form string="Equity Trade Audit Log" create="0" delete="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="create_date"/>
+                            <field name="trade_order_id"/>
+                            <field name="equity_transaction_id"/>
+                            <field name="user_id"/>
+                            <field name="action"/>
+                        </group>
+                        <group>
+                            <field name="content_signature"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Amendment Reason">
+                        <field name="amendment_reason" nolabel="1" colspan="2"/>
+                    </group>
+                    <group string="Snapshot Before Change">
+                        <field name="snapshot_before" nolabel="1" colspan="2"/>
+                    </group>
+                    <group string="Changed Fields">
+                        <field name="changed_fields" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="equity_trade_audit_log_action" model="ir.actions.act_window">
+        <field name="name">Trade Audit Logs</field>
+        <field name="res_model">equity.trade.audit.log</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="equity_portfolio_revaluation_view_list" model="ir.ui.view">
+        <field name="name">equity.portfolio.revaluation.list</field>
+        <field name="model">equity.portfolio.revaluation</field>
+        <field name="arch" type="xml">
+            <list string="Portfolio Revaluations">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="total_market_value"/>
+                <field name="total_book_value"/>
+                <field name="total_adjustment"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-success="state == 'posted'"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="equity_portfolio_revaluation_view_form" model="ir.ui.view">
+        <field name="name">equity.portfolio.revaluation.form</field>
+        <field name="model">equity.portfolio.revaluation</field>
+        <field name="arch" type="xml">
+            <form string="Portfolio Revaluation">
+                <header>
+                    <button name="action_open_journal_entries"
+                            string="Journal Entries"
+                            type="object"
+                            class="btn-primary"
+                            invisible="not move_ids"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,posted"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="total_market_value"/>
+                            <field name="total_book_value"/>
+                            <field name="total_adjustment"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Positions">
+                            <field name="line_ids" readonly="1">
+                                <list>
+                                    <field name="investment_fund_id"/>
+                                    <field name="share_class_id"/>
+                                    <field name="quantity"/>
+                                    <field name="market_price"/>
+                                    <field name="market_value"/>
+                                    <field name="book_value"/>
+                                    <field name="adjustment_amount"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Journal Entries">
+                            <field name="move_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="journal_id"/>
+                                    <field name="state"/>
+                                    <field name="amount_total_signed"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="equity_portfolio_revaluation_action" model="ir.actions.act_window">
+        <field name="name">Portfolio Revaluations</field>
+        <field name="res_model">equity.portfolio.revaluation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

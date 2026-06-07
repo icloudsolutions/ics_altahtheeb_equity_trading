@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="equity_security_class_view_form_zakat" model="ir.ui.view">
+        <field name="name">equity.security.class.form.zakat</field>
+        <field name="model">equity.security.class</field>
+        <field name="inherit_id" ref="equity.view_equity_security_class_form"/>
+        <field name="arch" type="xml">
+            <field name="dividend_payout" position="after">
+                <field name="zakat_classification"
+                       invisible="class_type != 'shares'"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="equity_security_class_view_list_zakat" model="ir.ui.view">
+        <field name="name">equity.security.class.list.zakat</field>
+        <field name="model">equity.security.class</field>
+        <field name="inherit_id" ref="equity.view_equity_security_class_list"/>
+        <field name="arch" type="xml">
+            <field name="dividend_payout" position="after">
+                <field name="zakat_classification"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

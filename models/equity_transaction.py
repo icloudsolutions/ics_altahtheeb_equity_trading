@@ -31,8 +31,28 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare
 
 from . import tools
+from .equity_trade_order import (
+    IMMUTABLE_TRADE_STATES,
+    MANAGER_GROUP,
+    PENDING_TRADE_STATES,
+    SYSTEM_WRITE_CONTEXT_KEY,
+)
 
 _logger = logging.getLogger(__name__)
+
+TRANSACTION_AUDITED_FIELDS = frozenset({
+    'company_id',
+    'date',
+    'partner_id',
+    'rofr_notice_date',
+    'rofr_waiver_approved',
+    'securities',
+    'security_class_id',
+    'security_price',
+    'seller_id',
+    'subscriber_id',
+    'transaction_type',
+})
 
 # ---------------------------------------------------------------------------
 # Module-level constants
@@ -113,6 +133,127 @@ class EquityTransaction(models.Model):
         index=True,
         help="Source marketplace listing that originated this equity transaction.",
     )
+    lot_allocation_ids = fields.One2many(
+        comodel_name='equity.lot.allocation',
+        inverse_name='sell_transaction_id',
+        string="FIFO Lot Allocations",
+        copy=False,
+        readonly=True,
+    )
+    disposal_processed = fields.Boolean(
+        string="FIFO Disposal Processed",
+        copy=False,
+        readonly=True,
+    )
+    disposal_cost_basis = fields.Monetary(
+        string="Disposal Cost Basis",
+        currency_field='equity_currency_id',
+        copy=False,
+        readonly=True,
+    )
+    disposal_proceeds = fields.Monetary(
+        string="Disposal Proceeds",
+        currency_field='equity_currency_id',
+        copy=False,
+        readonly=True,
+    )
+    realized_gain_loss = fields.Monetary(
+        string="Realized Gain/Loss",
+        currency_field='equity_currency_id',
+        copy=False,
+        readonly=True,
+        tracking=True,
+    )
+    trade_order_ids = fields.One2many(
+        comodel_name='equity.trade.order',
+        inverse_name='equity_transaction_id',
+        string="Trade Order Logs",
+        readonly=True,
+        copy=False,
+    )
+
+    # -------------------------------------------------------------------------
+    # Trade-order immutability bridge
+    # -------------------------------------------------------------------------
+
+    def _ensure_trade_orders(self):
+        TradeOrder = self.env['equity.trade.order']
+        missing = self.filtered(lambda tx: not tx.trade_order_ids)
+        for transaction in missing:
+            TradeOrder.sync_from_transaction(transaction)
+
+    def _check_trade_log_immutability(self, vals):
+        if not vals or self.env.context.get(SYSTEM_WRITE_CONTEXT_KEY):
+            return
+        self._ensure_trade_orders()
+        locked = self.filtered(
+            lambda tx: tx.trade_order_ids[:1].state in IMMUTABLE_TRADE_STATES
+        )
+        if locked:
+            tools.raise_bilingual_user_error(
+                "Validated equity transactions are immutable once their trade log "
+                "reaches confirmed or posted state. Blocked records: %(records)s.",
+                "معاملات الأسهم المعتمدة غير قابلة للتعديل بعد وصول سجل التداول "
+                "إلى حالة مؤكدة أو مرحّلة. السجلات المحظورة: %(records)s.",
+                records=', '.join(locked.mapped('display_name')),
+            )
+
+    def _audit_trade_log_amendment(self, vals):
+        if not vals or self.env.context.get(SYSTEM_WRITE_CONTEXT_KEY):
+            return
+        if not self.env.user.has_group(MANAGER_GROUP):
+            return
+        audited_changes = {
+            key: value
+            for key, value in vals.items()
+            if key in TRANSACTION_AUDITED_FIELDS
+        }
+        if not audited_changes:
+            return
+        self._ensure_trade_orders()
+        for transaction in self:
+            order = transaction.trade_order_ids[:1]
+            if order and order.state in PENDING_TRADE_STATES:
+                order._audit_admin_pending_amendment(audited_changes)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        transactions = super().create(vals_list)
+        for transaction in transactions:
+            self.env['equity.trade.order'].sync_from_transaction(transaction)
+        return transactions
+
+    def write(self, vals):
+        self._check_trade_log_immutability(vals)
+        self._audit_trade_log_amendment(vals)
+        result = super(EquityTransaction, self).write(vals)
+        sync_fields = {
+            'company_id', 'date', 'marketplace_listing_id', 'securities',
+            'security_class_id', 'security_price', 'seller_id', 'state',
+            'subscriber_id',
+        }
+        if sync_fields.intersection(vals):
+            for transaction in self:
+                self.env['equity.trade.order'].sync_from_transaction(transaction)
+        if vals.get('state') in ('signed_legal', 'done'):
+            self._process_fifo_disposal_if_sell()
+        return result
+
+    def unlink(self):
+        if not self.env.context.get(SYSTEM_WRITE_CONTEXT_KEY):
+            self._ensure_trade_orders()
+            locked = self.filtered(
+                lambda tx: tx.trade_order_ids[:1].state in IMMUTABLE_TRADE_STATES
+            )
+            if locked:
+                tools.raise_bilingual_user_error(
+                    "Validated equity transactions cannot be deleted once their trade "
+                    "log reaches confirmed or posted state. Blocked records: %(records)s.",
+                    "لا يمكن حذف معاملات الأسهم المعتمدة بعد وصول سجل التداول "
+                    "إلى حالة مؤكدة أو مرحّلة. السجلات المحظورة: %(records)s.",
+                    records=', '.join(locked.mapped('display_name')),
+                )
+        return super().unlink()
 
     # -------------------------------------------------------------------------
     # Constraints
@@ -148,6 +289,64 @@ class EquityTransaction(models.Model):
                     "يجب أن يكون كل مظروف توقيع فريداً.",
                     request=transaction.sign_request_id.display_name,
                 )
+
+    # -------------------------------------------------------------------------
+    # FIFO disposal integration
+    # -------------------------------------------------------------------------
+
+    def _is_sell_disposal_candidate(self):
+        """True when this transaction is a share transfer sale eligible for FIFO."""
+        self.ensure_one()
+        return (
+            self.transaction_type == 'transfer'
+            and self.seller_id
+            and self.securities_type == 'shares'
+            and float_compare(self.securities, 0.0, precision_digits=SHARES_PRECISION) > 0
+        )
+
+    def _process_fifo_disposal_if_sell(self):
+        """Run FIFO lot allocation for finalized sell transfers."""
+        Disposal = self.env['equity.transaction.disposal']
+        for transaction in self.filtered(
+            lambda tx: tx._is_sell_disposal_candidate()
+            and tx.state in ('signed_legal', 'done')
+            and not tx.disposal_processed
+        ):
+            Disposal.process_sell_transaction(transaction)
+
+    def action_open_trade_order(self):
+        self.ensure_one()
+        order = self.trade_order_ids[:1]
+        if not order:
+            order = self.env['equity.trade.order'].sync_from_transaction(self)
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Trade Order Log'),
+            'res_model': 'equity.trade.order',
+            'res_id': order.id,
+            'view_mode': 'form',
+        }
+
+    def action_open_trade_audit_logs(self):
+        self.ensure_one()
+        order = self.trade_order_ids[:1]
+        if not order:
+            order = self.env['equity.trade.order'].sync_from_transaction(self)
+        return order.action_open_audit_logs()
+
+    def action_open_fifo_disposal_wizard(self):
+        """Open the FIFO disposal wizard for a finalized sell transaction."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('FIFO Disposal'),
+            'res_model': 'equity.transaction.disposal',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_sell_transaction_id': self.id,
+            },
+        }
 
     # -------------------------------------------------------------------------
     # Cap-table helpers
@@ -546,7 +745,7 @@ class EquityTransaction(models.Model):
             ],
         })
 
-        self.write({
+        self.with_context(**{SYSTEM_WRITE_CONTEXT_KEY: True}).write({
             'sign_request_id': sign_request.id,
             'state': 'waiting_signature',
         })
@@ -597,9 +796,12 @@ class EquityTransaction(models.Model):
         if not waiting_transactions:
             return waiting_transactions
 
-        waiting_transactions.write({'state': 'signed_legal'})
+        waiting_transactions.with_context(**{SYSTEM_WRITE_CONTEXT_KEY: True}).write({
+            'state': 'signed_legal',
+        })
         waiting_transactions.flush_model(['state'])
         self.env['equity.cap.table'].invalidate_model()
+        waiting_transactions._process_fifo_disposal_if_sell()
 
         message = _(
             "%(english)s\n\n%(arabic)s",
@@ -944,7 +1146,7 @@ class EquityTransaction(models.Model):
             # Step 2 — cancel the transaction and clear the sign FK atomically.
             # Both fields are written in a single call so the
             # _check_sign_request_state constraint sees the correct final state.
-            self.write({
+            self.with_context(**{SYSTEM_WRITE_CONTEXT_KEY: True}).write({
                 'state': 'cancelled',
                 'sign_request_id': False,
             })
@@ -994,7 +1196,7 @@ class EquityTransaction(models.Model):
             )
         # Use the public action_cancel() API — same as the cron, for consistency.
         self._cancel_linked_sign_request()
-        self.write({
+        self.with_context(**{SYSTEM_WRITE_CONTEXT_KEY: True}).write({
             'state': LEGAL_FLOW_READY_STATE,
             'sign_request_id': False,
         })
