@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="seq_equity_marketplace_board" model="ir.sequence">
+        <field name="name">Equity Marketplace Listing</field>
+        <field name="code">equity.marketplace.board</field>
+        <field name="prefix">TRD-%(year)s-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+</odoo>

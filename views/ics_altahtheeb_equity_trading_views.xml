@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="equity_marketplace_board_view_list" model="ir.ui.view">
+        <field name="name">equity.marketplace.board.list</field>
+        <field name="model">equity.marketplace.board</field>
+        <field name="arch" type="xml">
+            <list string="Marketplace Listings">
+                <field name="name"/>
+                <field name="listing_type"/>
+                <field name="shareholder_id"/>
+                <field name="share_class_id"/>
+                <field name="qty"/>
+                <field name="price_unit"/>
+                <field name="price_total"/>
+                <field name="matched_partner_id"/>
+                <field name="rofr_deadline"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'published'"
+                       decoration-success="state == 'done'"
+                       decoration-warning="state in ('matched', 'approved', 'sign_process')"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="equity_marketplace_board_view_form" model="ir.ui.view">
+        <field name="name">equity.marketplace.board.form</field>
+        <field name="model">equity.marketplace.board</field>
+        <field name="arch" type="xml">
+            <form string="Marketplace Listing">
+                <header>
+                    <button name="action_publish"
+                            string="Publish"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,published,matched,approved,sign_process,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="listing_type" readonly="state != 'draft'"/>
+                            <field name="shareholder_id" readonly="state != 'draft'"/>
+                            <field name="share_class_id" readonly="state != 'draft'"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="qty" readonly="state != 'draft'"/>
+                            <field name="price_unit" readonly="state != 'draft'"/>
+                            <field name="price_total" readonly="1"/>
+                            <field name="currency_id" readonly="1"/>
+                            <field name="rofr_deadline" readonly="1"/>
+                            <field name="matched_partner_id" readonly="state not in ('published', 'matched')"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="equity_marketplace_board_view_search" model="ir.ui.view">
+        <field name="name">equity.marketplace.board.search</field>
+        <field name="model">equity.marketplace.board</field>
+        <field name="arch" type="xml">
+            <search string="Marketplace Listings">
+                <field name="name"/>
+                <field name="shareholder_id"/>
+                <field name="matched_partner_id"/>
+                <field name="share_class_id"/>
+                <filter string="Sell Offers" name="filter_sell" domain="[('listing_type', '=', 'sell')]"/>
+                <filter string="Buying Requests" name="filter_buy" domain="[('listing_type', '=', 'buy')]"/>
+                <filter string="Published" name="filter_published" domain="[('state', '=', 'published')]"/>
+                <group>
+                    <filter string="Listing Type" name="group_listing_type" context="{'group_by': 'listing_type'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Share Class" name="group_share_class" context="{'group_by': 'share_class_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="equity_marketplace_board_action" model="ir.actions.act_window">
+        <field name="name">Marketplace Board</field>
+        <field name="res_model">equity.marketplace.board</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="equity_marketplace_board_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a share trading listing
+            </p>
+            <p>
+                Publish sell offers or buying requests on the Al Tahtheeb internal equity marketplace.
+            </p>
+        </field>
+    </record>
+
+</odoo>

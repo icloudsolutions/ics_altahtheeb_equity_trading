@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_ics_altahtheeb_equity_trading_root"
+              name="Equity Trading"
+              sequence="46"/>
+
+    <menuitem id="menu_equity_marketplace_board"
+              name="Marketplace Board"
+              parent="menu_ics_altahtheeb_equity_trading_root"
+              action="equity_marketplace_board_action"
+              sequence="10"/>
+
+</odoo>
