@@ -3,7 +3,14 @@
 
     <menuitem id="menu_ics_altahtheeb_equity_trading_root"
               name="Equity Trading"
+              groups="ics_altahtheeb_equity_trading.group_equity_trading_user"
               sequence="46"/>
+
+    <menuitem id="menu_equity_trading_dashboard"
+              name="Dashboard"
+              parent="menu_ics_altahtheeb_equity_trading_root"
+              action="action_equity_trading_dashboard"
+              sequence="1"/>
 
     <menuitem id="menu_equity_marketplace_board"
               name="Marketplace Board"

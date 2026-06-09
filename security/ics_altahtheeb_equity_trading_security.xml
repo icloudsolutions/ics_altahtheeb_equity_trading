@@ -1,23 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
 
+    <!--
+        Odoo 19+ groups model:
+        * ir.module.category   — app section in Settings → Users
+        * res.groups.privilege — role row under that category
+        * res.groups           — each role; uses privilege_id (NOT category_id)
+    -->
+
     <record id="module_category_equity_trading" model="ir.module.category">
         <field name="name">Equity Trading</field>
         <field name="description">Al Tahtheeb equity trading, marketplace, and legal signature workflows.</field>
         <field name="sequence">31</field>
     </record>
 
+    <record id="privilege_equity_trading" model="res.groups.privilege">
+        <field name="name">Equity Trading</field>
+        <field name="description">Roles for marketplace listings, trade logs, and legal signature workflows.</field>
+        <field name="placeholder">No equity trading access</field>
+        <field name="sequence">31</field>
+        <field name="category_id" ref="module_category_equity_trading"/>
+    </record>
+
     <record id="group_equity_trading_user" model="res.groups">
         <field name="name">User</field>
-        <field name="category_id" ref="module_category_equity_trading"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="privilege_id" ref="privilege_equity_trading"/>
+        <field name="sequence">10</field>
+        <!--
+            Inherits base.group_user (internal user) and equity.group_equity_viewer
+            so trading users automatically receive read access to all native equity
+            models (equity.transaction, equity.cap.table, equity.valuation, equity.ubo,
+            equity.security.class) without duplicating access rules here.
+        -->
+        <field name="implied_ids" eval="[
+            (4, ref('base.group_user')),
+            (4, ref('equity.group_equity_viewer')),
+        ]"/>
     </record>
 
     <record id="group_equity_trading_manager" model="res.groups">
         <field name="name">Manager</field>
-        <field name="category_id" ref="module_category_equity_trading"/>
-        <field name="implied_ids" eval="[(4, ref('group_equity_trading_user'))]"/>
-        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="privilege_id" ref="privilege_equity_trading"/>
+        <field name="sequence">20</field>
+        <!--
+            Inherits group_equity_trading_user (and by transitivity
+            equity.group_equity_viewer) PLUS equity.group_equity_manager, giving
+            write/create permissions on all native equity models.
+        -->
+        <field name="implied_ids" eval="[
+            (4, ref('group_equity_trading_user')),
+            (4, ref('equity.group_equity_manager')),
+        ]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
     </record>
 
 </odoo>

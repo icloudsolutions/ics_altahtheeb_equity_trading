@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_equity_trading_dashboard" model="ir.actions.client">
+        <field name="name">Equity Trading Dashboard</field>
+        <field name="tag">ics_altahtheeb_equity_trading.EquityTradingDashboard</field>
+        <field name="target">current</field>
+    </record>
+
+</odoo>

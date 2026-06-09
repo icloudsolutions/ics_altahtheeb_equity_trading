@@ -2,19 +2,10 @@
 
 import logging
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
-
-LEGAL_SIGNATURE_CONFIRMED_MESSAGE_EN = (
-    "Cryptographic identity verification verified. "
-    "Equity ledger balances updated securely."
-)
-LEGAL_SIGNATURE_CONFIRMED_MESSAGE_AR = (
-    "تم التحقق من الهوية الرقمية بنجاح. "
-    "تم تحديث أرصدة سجل الأسهم بشكل آمن."
-)
 
 
 class SignRequest(models.Model):
@@ -56,19 +47,8 @@ class SignRequest(models.Model):
         if not finalized:
             return
 
-        message = _(
-            "%(english)s\n\n%(arabic)s",
-            english=_(LEGAL_SIGNATURE_CONFIRMED_MESSAGE_EN),
-            arabic=_(LEGAL_SIGNATURE_CONFIRMED_MESSAGE_AR),
-        )
-        finalized_sign_request_ids = set(finalized.sign_request_id.ids)
-        for sign_request in sign_requests.filtered(
-            lambda sr: sr.id in finalized_sign_request_ids
-        ):
-            sign_request.message_post(body=message)
-
         _logger.info(
             "sign.request write hook finalized equity.transaction %s after sign.request %s.",
             finalized.ids,
-            list(finalized_sign_request_ids),
+            finalized.sign_request_id.ids,
         )

@@ -1,0 +1,3128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ics_altahtheeb_equity_trading
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e-20260324\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-08 00:49+0000\n"
+"PO-Revision-Date: 2026-06-08 00:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__sell_qty
+msgid "# Securities"
+msgstr "عدد الأوراق المالية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+#: code:addons/ics_altahtheeb_equity_trading/models/tools.py:0
+msgid ""
+"%(english)s\n"
+"\n"
+"%(arabic)s"
+msgstr ""
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_portfolio_revaluation.py:0
+msgid "%(fund)s / %(share_class)s fair-value adjustment"
+msgstr "تسوية القيمة العادلة %(fund)s / %(share_class)s"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+".\n"
+"                                Contact your equity administrator for discrepancies."
+msgstr ""
+".\n"
+"                                تواصل مع مسؤول الأسهم في حال وجود اختلافات."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid ""
+"<span class=\"badge rounded-pill                                                                          text-bg-light border                                                                          text-muted fw-normal\">\n"
+"                                                                Your listing\n"
+"                                                            </span>"
+msgstr ""
+"<span class=\"badge rounded-pill                                                                          text-bg-light border                                                                          text-muted fw-normal\">\n"
+"                                                                إعلانك\n"
+"                                                            </span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"<span class=\"badge rounded-pill text-bg-primary                                                      fw-normal small\" aria-hidden=\"true\">\n"
+"                                            Cap Table\n"
+"                                        </span>"
+msgstr ""
+"<span class=\"badge rounded-pill text-bg-primary                                                      fw-normal small\" aria-hidden=\"true\">\n"
+"                                            جدول رأس المال\n"
+"                                        </span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"<span class=\"badge rounded-pill text-bg-success                                                      fw-normal small\" aria-hidden=\"true\">\n"
+"                                            Live\n"
+"                                        </span>"
+msgstr ""
+"<span class=\"badge rounded-pill text-bg-success                                                      fw-normal small\" aria-hidden=\"true\">\n"
+"                                            مباشر\n"
+"                                        </span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_form
+msgid "<span class=\"o_stat_text\">Equity Transaction</span>"
+msgstr "<span class=\"o_stat_text\">معاملة الأسهم</span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+msgid "<span class=\"o_stat_text\">FIFO Result</span>"
+msgstr "<span class=\"o_stat_text\">نتيجة الوارد أولاً</span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+msgid "<span class=\"o_stat_text\">Trade Log</span>"
+msgstr "<span class=\"o_stat_text\">سجل التداول</span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"<span class=\"text-muted fw-normal small\">\n"
+"                                                            Mixed currencies\n"
+"                                                        </span>"
+msgstr ""
+"<span class=\"text-muted fw-normal small\">\n"
+"                                                            عملات مختلطة\n"
+"                                                        </span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "<span class=\"text-muted small\">—</span>"
+msgstr "<span class=\"text-muted small\">—</span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "<span class=\"text-primary fs-4\" aria-hidden=\"true\">✍</span>"
+msgstr "<span class=\"text-primary fs-4\" aria-hidden=\"true\">✍</span>"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid ""
+"A matched counterparty is required once the listing leaves the published "
+"state."
+msgstr "يُشترط وجود طرف مقابل مطابق بمجرد خروج الإعلان من حالة المنشور."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction_disposal.py:0
+msgid "A seller is required to process a FIFO disposal."
+msgstr "يُشترط وجود بائع لمعالجة التخلص بطريقة الوارد أولاً."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid "A signature request is required while waiting for signatures."
+msgstr "يُشترط وجود طلب توقيع أثناء انتظار التوقيعات."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__action
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Action"
+msgstr "الإجراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_needaction
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_needaction
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_needaction
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_needaction
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_needaction
+msgid "Action Needed"
+msgstr "إجراء مطلوب"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Action Required — Pending Signatures"
+msgstr "إجراء مطلوب — توقيعات معلّقة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__active
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__active
+msgid "Active"
+msgstr "نشط"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Active Listings"
+msgstr "الإعلانات النشطة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Active Share Marketplace Listings"
+msgstr "إعلانات سوق الأسهم النشطة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_exception_decoration
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "تزيين استثناء النشاط"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_state
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_type_icon
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "أيقونة نوع النشاط"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_audit_log__action__override
+msgid "Administrative Override"
+msgstr "تجاوز إداري"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"Aggregated active share allocations\n"
+"                                            across all equity classes."
+msgstr ""
+"إجمالي توزيعات الأسهم النشطة\n"
+"                                            عبر جميع فئات الأسهم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.server,name:ics_altahtheeb_equity_trading.ir_cron_expire_stale_signature_requests_ir_actions_server
+msgid "Al Tahtheeb Equity: Expire Stale Signature Requests"
+msgstr "التحذيب للأسهم: إنهاء طلبات التوقيع المنتهية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.server,name:ics_altahtheeb_equity_trading.ir_cron_post_period_end_revaluations_ir_actions_server
+msgid "Al Tahtheeb Equity: Period-End Portfolio Revaluation"
+msgstr "التحذيب للأسهم: إعادة تقييم المحفظة في نهاية الفترة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.server,name:ics_altahtheeb_equity_trading.ir_cron_sync_market_feed_prices_ir_actions_server
+msgid "Al Tahtheeb Equity: Sync Market Feed Prices"
+msgstr "التحذيب للأسهم: مزامنة أسعار السوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Al Tahtheeb Internal Share Marketplace"
+msgstr "سوق الأسهم الداخلي للتحذيب"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.module.category,description:ics_altahtheeb_equity_trading.module_category_equity_trading
+msgid ""
+"Al Tahtheeb equity trading, marketplace, and legal signature workflows."
+msgstr "تداول أسهم التحذيب والسوق الداخلي وسير عمل التوقيع القانوني."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__qty
+msgid "Allocated Quantity"
+msgstr "الكمية المخصصة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_lot_allocation.py:0
+msgid "Allocated quantity must be strictly positive."
+msgstr "يجب أن تكون الكمية المخصصة أكبر من صفر."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_audit_log__action__amendment
+msgid "Amendment"
+msgstr "تعديل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__amendment_reason
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_trade_audit_log_view_form
+msgid "Amendment Reason"
+msgstr "سبب التعديل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__amount_total
+msgid "Amount Total"
+msgstr "المبلغ الإجمالي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__zakat_base_contribution_value
+msgid ""
+"Amount this holding contributes to the Zakat base (ZB) under GAZT/ZATCA rules for listed shares:\n"
+"• Trading — year-end fair market value (quantity × market price).\n"
+"• Strategic / Long-term — zero (deduction handled separately on the zakat declaration)."
+msgstr ""
+"المبلغ الذي تساهم به الملكية في وعاء الزكاة وفق قواعد هيئة الزكاة:\n"
+"• التداول: القيمة السوقية العادلة في نهاية السنة (الكمية × سعر السوق).\n"
+"• الاستراتيجي/طويل الأجل: صفر (يُعالج الخصم بشكل منفصل في إقرار الزكاة)."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid ""
+"An equity transaction can only be linked after the listing has been matched."
+msgstr "يمكن ربط معاملة الأسهم فقط بعد مطابقة الإعلان."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid ""
+"An unexpected error occurred while processing your buy proposal. Please try "
+"again or contact support."
+msgstr "حدث خطأ غير متوقع أثناء معالجة عرض الشراء. يرجى المحاولة مرة أخرى أو التواصل مع الدعم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__analytic_account_id
+msgid "Analytic Account"
+msgstr "الحساب التحليلي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__analytic_account_id
+msgid "Analytical axis used on all revaluation journal items for this fund."
+msgstr "المحور التحليلي المستخدم في جميع قيود إعادة التقييم لهذا الصندوق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_form
+msgid "Approve"
+msgstr "اعتماد"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__state__approved
+msgid "Approved"
+msgstr "معتمد"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid ""
+"Are you sure you want to commit to purchasing\n"
+"                                                these equity shares? This action triggers the\n"
+"                                                statutory legal approval process."
+msgstr ""
+"هل أنت متأكد من الالتزام بشراء\n"
+"                                                هذه الأسهم؟ يُطلق هذا الإجراء\n"
+"                                                عملية الاعتماد القانوني النظامية."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__revaluation_account_id
+msgid "Asset Revaluation Account"
+msgstr "حساب إعادة تقييم الأصول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_attachment_count
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_attachment_count
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_attachment_count
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_attachment_count
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__audit_log_count
+msgid "Audit Log Count"
+msgstr "عدد سجلات التدقيق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__audit_log_ids
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_trade_order_view_form
+msgid "Audit Logs"
+msgstr "سجلات التدقيق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Available after"
+msgstr "متاح بعد"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Back to Dashboard"
+msgstr "العودة إلى اللوحة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "Back to Portfolio"
+msgstr "العودة إلى المحفظة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__revaluation_account_id
+msgid "Balance-sheet account recording accumulated fair-value adjustments."
+msgstr "حساب الميزانية العمومية لتسجيل تسويات القيمة العادلة المتراكمة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"Based on the latest company valuation\n"
+"                                                and your current ownership share."
+msgstr ""
+"استناداً إلى أحدث تقييم للشركة\n"
+"                                                وحصتك الحالية في الملكية."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_transaction__rofr_waiver_approved
+msgid ""
+"Board-approved waiver of the right-of-first-refusal window for this "
+"transaction."
+msgstr "تنازل معتمد من مجلس الإدارة عن فترة حق الأولوية في الشراء لهذه المعاملة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__book_value
+msgid "Book Value"
+msgstr "القيمة الدفترية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__book_value_account_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__book_value_account_id
+msgid "Book Value Account"
+msgstr "حساب القيمة الدفترية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__zakat_deductible_value
+msgid ""
+"Book value eligible for deduction from the Zakat base when the holding is "
+"classified as strategic/long-term and investee zakat conditions are "
+"satisfied."
+msgstr "القيمة الدفترية المؤهلة للخصم من وعاء الزكاة عندما تُصنّف الملكية استراتيجية/طويلة الأجل."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_investment_fund.py:0
+msgid ""
+"Book value, revaluation, and unrealized gain/loss accounts must be three "
+"different accounts for fund %(fund)s."
+msgstr "يجب أن تكون حسابات القيمة الدفترية وإعادة التقييم والأرباح/الخسائر غير المحققة ثلاثة حسابات مختلفة للصندوق %(fund)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Browse Marketplace"
+msgstr "تصفح السوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_my_home_portfolio
+msgid "Browse published listings and submit buy proposals"
+msgstr "تصفح الإعلانات المنشورة وقدّم عروض الشراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_order__trade_side__buy
+msgid "Buy"
+msgstr "شراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__buy_transaction_id
+msgid "Buy Lot"
+msgstr "دفعة الشراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__buy_unit_price
+msgid "Buy Unit Price"
+msgstr "سعر شراء الوحدة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__listing_type__buy
+msgid "Buying Request"
+msgstr "طلب شراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_search
+msgid "Buying Requests"
+msgstr "طلبات الشراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Cancel"
+msgstr "إلغاء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+msgid "Cancel Signature Request"
+msgstr "إلغاء طلب التوقيع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid "Cancellation"
+msgstr "إلغاء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__state__cancelled
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_portfolio_revaluation__state__cancelled
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_order__state__cancelled
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_transaction__state__cancelled
+msgid "Cancelled"
+msgstr "ملغى"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__holder_ids
+msgid "Cap Table Holders"
+msgstr "حاملو جدول رأس المال"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__changed_fields
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_trade_audit_log_view_form
+msgid "Changed Fields"
+msgstr "الحقول المعدّلة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__security_class_id
+msgid "Class"
+msgstr "الفئة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_disposal_view_form
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Close"
+msgstr "إغلاق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__code
+msgid "Code"
+msgstr "الرمز"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_res_company
+msgid "Companies"
+msgstr "الشركات"
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__company_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__company_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__company_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__company_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__company_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__company_id
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Company"
+msgstr "الشركة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"Completed equity transfers and issuances will appear\n"
+"                                        here once their ledger state is finalised."
+msgstr ""
+"ستظهر معاملات نقل وإصدار الأسهم المكتملة\n"
+"                                        هنا بعد اكتمال حالة السجل."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_res_config_settings
+msgid "Config Settings"
+msgstr "تهيئة الإعدادات"
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__financial_tag_ids
+msgid ""
+"Configure matching tags on the linked GL accounts for statutory reporting."
+msgstr "ضبط وسوم المطابقة على حسابات دفتر الأستاذ المرتبطة للتقارير النظامية."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Confirm Buy Proposal"
+msgstr "تأكيد عرض الشراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Confirm — Submit Buy Proposal"
+msgstr "تأكيد — تقديم عرض الشراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_order__state__confirmed
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_transaction__state__confirmed
+msgid "Confirmed"
+msgstr "مؤكد"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid "Corporate Authority Representative"
+msgstr "المفوض بالتوقيع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__cost_basis
+msgid "Cost Basis"
+msgstr "أساس التكلفة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__counterparty_id
+msgid "Counterparty"
+msgstr "الطرف المقابل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_form
+msgid "Create Transaction"
+msgstr "إنشاء معاملة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.actions.act_window,help:ics_altahtheeb_equity_trading.equity_marketplace_board_action
+msgid "Create a share trading listing"
+msgstr "إنشاء إعلان تداول أسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__create_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__create_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__create_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__create_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__create_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__create_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__create_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__create_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__create_uid
+msgid "Created by"
+msgstr "أنشأه"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid "Created from marketplace listing %(listing)s."
+msgstr "تم الإنشاء من إعلان السوق %(listing)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__create_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__create_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__create_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__create_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__create_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__create_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__create_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__create_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__currency_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__currency_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__currency_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__currency_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__currency_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__currency_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__currency_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__current_book_value
+msgid "Current Book Value"
+msgstr "القيمة الدفترية الحالية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__current_market_value
+msgid "Current Market Value"
+msgstr "القيمة السوقية الحالية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Current Portfolio Valuation"
+msgstr "التقييم الحالي للمحفظة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__current_quantity
+msgid "Current Quantity"
+msgstr "الكمية الحالية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Current Share Allocations"
+msgstr "توزيعات الأسهم الحالية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Data reflects the equity cap table as of"
+msgstr "تعكس البيانات جدول رأس المال اعتباراً من"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__buy_transaction_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__date
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Date"
+msgstr "التاريخ"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_transaction__rofr_notice_date
+msgid ""
+"Date the share block / transfer notice was logged to existing shareholders "
+"to start the statutory right-of-first-refusal window."
+msgstr "تاريخ تسجيل إشعار عرض/نقل الحصص للمساهمين الحاليين لبدء فترة حق الأولوية النظامية."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_security_class__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_company__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_sign_request__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__disposal_cost_basis
+msgid "Disposal Cost Basis"
+msgstr "أساس تكلفة التخلص"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__disposal_proceeds
+msgid "Disposal Proceeds"
+msgstr "عائدات التخلص"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__state__done
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_transaction__state__done
+msgid "Done"
+msgstr "منجز"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__state__draft
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_portfolio_revaluation__state__draft
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_order__state__draft
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_transaction__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_portfolio_revaluation.py:0
+msgid "Draft fair-value revaluation generated from %(batch)s on %(date)s."
+msgstr "تم إنشاء مسودة إعادة تقييم بالقيمة العادلة من %(batch)s بتاريخ %(date)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_trade_order.py:0
+#: model:ir.model.constraint,message:ics_altahtheeb_equity_trading.constraint_equity_trade_order_equity_transaction_unique
+msgid "Each equity transaction may only have one trade order log."
+msgstr "يمكن أن يكون لكل معاملة أسهم سجل تداول واحد فقط."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_portfolio_asset.py:0
+#: model:ir.model.constraint,message:ics_altahtheeb_equity_trading.constraint_equity_portfolio_asset_company_share_class_unique
+msgid "Each share class may only have one portfolio asset per company."
+msgstr "يمكن أن يكون لكل فئة سهم أصل محفظة واحد فقط لكل شركة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "Electronic Signature — Share Transfer Agreement"
+msgstr "توقيع إلكتروني — اتفاقية نقل الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__rofr_deadline
+msgid ""
+"End date of the Right of First Refusal window for existing shareholders."
+msgstr "تاريخ انتهاء فترة حق الأولوية في الشراء للمساهمين الحاليين."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__company_partner_id
+msgid "Equity Company"
+msgstr "شركة الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_breadcrumbs_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Equity Dashboard"
+msgstr "لوحة الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_investment_fund
+msgid "Equity Investment Fund"
+msgstr "صندوق استثمار الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_lot_allocation
+msgid "Equity Lot Allocation (FIFO)"
+msgstr "توزيع دفعات الأسهم (الوارد أولاً صادر أولاً)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_marketplace_board
+msgid "Equity Marketplace Listing"
+msgstr "إعلان سوق الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_portfolio_asset
+msgid "Equity Portfolio Asset"
+msgstr "أصل محفظة الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_portfolio_revaluation
+msgid "Equity Portfolio Period-End Revaluation"
+msgstr "إعادة تقييم المحفظة في نهاية الفترة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_portfolio_revaluation_line
+msgid "Equity Portfolio Revaluation Line"
+msgstr "بند إعادة تقييم المحفظة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_trade_audit_log
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_trade_audit_log_view_form
+msgid "Equity Trade Audit Log"
+msgstr "سجل تدقيق تداول الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_trade_audit_log_view_list
+msgid "Equity Trade Audit Logs"
+msgstr "سجلات تدقيق تداول الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_trade_order
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_trade_order_view_form
+msgid "Equity Trade Order"
+msgstr "أمر تداول الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_trade_order_view_list
+msgid "Equity Trade Orders"
+msgstr "أوامر تداول الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.module.category,name:ics_altahtheeb_equity_trading.module_category_equity_trading
+#: model:ir.ui.menu,name:ics_altahtheeb_equity_trading.menu_ics_altahtheeb_equity_trading_root
+#: model:res.groups.privilege,name:ics_altahtheeb_equity_trading.privilege_equity_trading
+msgid "Equity Trading"
+msgstr "تداول الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid "Equity Trading Governance"
+msgstr "حوكمة تداول الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_transaction
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__equity_transaction_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__equity_transaction_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__equity_transaction_id
+msgid "Equity Transaction"
+msgstr "معاملة الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_transaction_disposal
+msgid "Equity Transaction FIFO Disposal"
+msgstr "التخلص من الأسهم بطريقة الوارد أولاً صادر أولاً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid "Equity portfolio access is not available for your account."
+msgstr "الوصول إلى محفظة الأسهم غير متاح لحسابك."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_portfolio_revaluation.py:0
+msgid "Equity revaluation %(fund)s — %(batch)s"
+msgstr "إعادة تقييم الأسهم %(fund)s — %(batch)s"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_trade_audit_log.py:0
+msgid ""
+"Equity trade audit logs are immutable historical records and cannot be "
+"modified."
+msgstr "سجلات تدقيق تداول الأسهم سجلات تاريخية غير قابلة للتعديل."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_trade_audit_log.py:0
+msgid "Equity trade audit logs cannot be deleted."
+msgstr "لا يمكن حذف سجلات تدقيق تداول الأسهم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid ""
+"Equity transfer transaction %(transaction)s created from marketplace "
+"listing."
+msgstr "تم إنشاء معاملة نقل أسهم %(transaction)s من إعلان السوق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Estimated Value"
+msgstr "القيمة التقديرية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"Estimated value across companies.\n"
+"                                                Amounts are expressed in mixed currencies."
+msgstr ""
+"القيمة التقديرية عبر الشركات.\n"
+"                                                المبالغ معروضة بعملات مختلطة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid "Exercise"
+msgstr "ممارسة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_disposal_view_form
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+msgid "FIFO Disposal"
+msgstr "التخلص بطريقة الوارد أولاً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__disposal_processed
+msgid "FIFO Disposal Processed"
+msgstr "تمت معالجة التخلص بطريقة الوارد أولاً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction_disposal.py:0
+msgid "FIFO Disposal Result"
+msgstr "نتيجة التخلص بطريقة الوارد أولاً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__lot_allocation_ids
+msgid "FIFO Lot Allocations"
+msgstr "توزيعات دفعات الوارد أولاً صادر أولاً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_search_ics
+msgid "FIFO Processed"
+msgstr "تمت معالجة الوارد أولاً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction_disposal.py:0
+msgid "FIFO disposal only applies to share transactions."
+msgstr "ينطبق التخلص بطريقة الوارد أولاً فقط على معاملات الأسهم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction_disposal.py:0
+msgid "FIFO disposal only applies to share transfer (sell) transactions."
+msgstr "ينطبق التخلص بطريقة الوارد أولاً فقط على معاملات نقل الأسهم (البيع)."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_portfolio_asset__sync_state__failed
+msgid "Failed"
+msgstr "فاشل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search
+msgid "Failed Sync"
+msgstr "مزامنة فاشلة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__adjustment_amount
+msgid "Fair Value Adjustment"
+msgstr "تسوية القيمة العادلة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__financial_tag_ids
+msgid "Financial Reporting Tags"
+msgstr "وسوم التقارير المالية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_follower_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_follower_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_follower_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_follower_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_follower_ids
+msgid "Followers"
+msgstr "المتابعون"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_partner_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_partner_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_partner_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_partner_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_type_icon
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيقونة Font Awesome مثل fa-tasks"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_search_ics
+msgid "From Marketplace"
+msgstr "من السوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_investment_fund_view_form
+msgid "Fund"
+msgstr "الصندوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_investment_fund.py:0
+#: model:ir.model.constraint,message:ics_altahtheeb_equity_trading.constraint_equity_investment_fund_code_company_unique
+msgid "Fund code must be unique per company."
+msgstr "يجب أن يكون رمز الصندوق فريداً لكل شركة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_investment_fund_view_form
+msgid "Fund name"
+msgstr "اسم الصندوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__investment_fund_id
+msgid ""
+"Fund whose GL accounts and analytic axis are used for period-end "
+"revaluation."
+msgstr "الصندوق الذي تُستخدم حسابات دفتر الأستاذ ومحوره التحليلي لإعادة التقييم في نهاية الفترة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__zakat_classification
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_security_class__zakat_classification
+msgid ""
+"GAZT/ZATCA treatment for listed share holdings:\n"
+"• Trading — included in the Zakat base at year-end fair market value.\n"
+"• Strategic / Long-term — not added to the Zakat base; may be deducted when the investee company meets zakat regulatory conditions."
+msgstr ""
+"معاملة هيئة الزكاة والضريبة والجمارك للأسهم المدرجة:\n"
+"• التداول: يُدرج في وعاء الزكاة بالقيمة السوقية العادلة في نهاية السنة.\n"
+"• الاستراتيجي/طويل الأجل: لا يُضاف إلى الوعاء؛ قد يُخصم عند استيفاء الشروط."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__book_value_account_id
+msgid "GL account carrying the historical cost / book value of fund holdings."
+msgstr "حساب دفتر الأستاذ الذي يحمل التكلفة التاريخية / القيمة الدفترية لممتلكات الصندوق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_investment_fund_view_form
+msgid "General Ledger Accounts"
+msgstr "حسابات دفتر الأستاذ العام"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__has_message
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__has_message
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__has_message
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__has_message
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__has_message
+msgid "Has Message"
+msgstr "يحتوي على رسائل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_company__equity_max_votes_per_share
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_config_settings__equity_max_votes_per_share
+msgid ""
+"Highest permitted votes-per-share weight for any equity class under company "
+"bylaws."
+msgstr "أعلى وزن مسموح للأصوات لكل سهم لأي فئة أسهم وفق النظام الأساسي."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid "Highest permitted votes-per-share weight for any equity class."
+msgstr "أعلى وزن مسموح للأصوات لكل سهم لأي فئة أسهم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Historical Equity Transactions"
+msgstr "معاملات الأسهم التاريخية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Historical Transactions Log"
+msgstr "سجل المعاملات التاريخي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__holder_id
+msgid "Holder"
+msgstr "الحامل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_security_class__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_company__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_config_settings__id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_sign_request__id
+msgid "ID"
+msgstr "المُعرف"
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_exception_icon
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_exception_icon
+msgid "Icon"
+msgstr "الأيقونة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_exception_icon
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "أيقونة تشير إلى نشاط استثنائي."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_needaction
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_needaction
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_needaction
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_needaction
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_order__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "عند التفعيل، تستلزم الرسائل الجديدة انتباهك."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_has_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_has_sms_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_has_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_has_sms_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_has_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_has_sms_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_has_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_has_sms_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_order__message_has_error
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_order__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "عند التفعيل، بعض الرسائل تعاني من خطأ في التسليم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+msgid "Initiate Legal Signature"
+msgstr "بدء التوقيع القانوني"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction_disposal.py:0
+msgid ""
+"Insufficient undisposed buy lots for holder %(holder)s on share class "
+"%(share_class)s. Shortfall: %(shortfall)s share(s)."
+msgstr "دفعات شراء غير مُستهلكة غير كافية للحامل %(holder)s على فئة السهم %(share_class)s. العجز: %(shortfall)s سهم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__content_signature
+msgid "Integrity Signature"
+msgstr "توقيع النزاهة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__investment_fund_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__investment_fund_id
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_investment_fund_view_form
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search_zakat
+msgid "Investment Fund"
+msgstr "صندوق الاستثمار"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.act_window,name:ics_altahtheeb_equity_trading.equity_investment_fund_action
+#: model:ir.ui.menu,name:ics_altahtheeb_equity_trading.menu_equity_investment_fund
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_investment_fund_view_list
+msgid "Investment Funds"
+msgstr "صناديق الاستثمار"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_is_follower
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_is_follower
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_is_follower
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_is_follower
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid "Issuance"
+msgstr "إصدار"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__changed_fields
+msgid "JSON map of field names to proposed new values."
+msgstr "خريطة JSON لأسماء الحقول والقيم الجديدة المقترحة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_portfolio_revaluation__state__posted
+msgid "Journal Created"
+msgstr "تم إنشاء القيد"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__move_ids
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_revaluation_view_form
+msgid "Journal Entries"
+msgstr "قيود اليومية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__last_market_sync
+msgid "Last Market Sync"
+msgstr "آخر مزامنة للسوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__sync_last_error
+msgid "Last Sync Error"
+msgstr "آخر خطأ في المزامنة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__write_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__write_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__write_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__write_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__write_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__write_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__write_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__write_uid
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__write_uid
+msgid "Last Updated by"
+msgstr "آخر تعديل بواسطة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__write_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__write_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__write_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__write_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__write_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__write_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__write_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__write_date
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__write_date
+msgid "Last Updated on"
+msgstr "آخر تعديل في"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__market_price
+msgid "Last successfully applied market price from the feed."
+msgstr "آخر سعر سوق مطبّق بنجاح من التغذية."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Ledger State"
+msgstr "حالة السجل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"Legal signature request initiated. The shareholder will sign first, followed"
+" by the corporate authority. Track progress here: %s"
+msgstr "تم بدء طلب التوقيع القانوني. يوقع المساهم أولاً يليه المفوض بالتوقيع. تابع التقدم هنا: %s"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_transaction__state__signed_legal
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_search_ics
+msgid "Legally Signed"
+msgstr "موقّع قانونياً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"Linked signature requests must be cleared before a transaction returns to "
+"draft or cancelled."
+msgstr "يجب إزالة طلبات التوقيع المرتبطة قبل إعادة المعاملة إلى مسودة أو ملغاة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__name
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Listing ID"
+msgstr "رقم الإعلان"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__listing_type
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_search
+msgid "Listing Type"
+msgstr "نوع الإعلان"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid ""
+"Listing matched successfully. A draft equity transfer transaction has been "
+"created and is awaiting internal approval."
+msgstr "تمت مطابقة الإعلان بنجاح. تم إنشاء معاملة نقل أسهم مسودة وهي بانتظار الاعتماد الداخلي."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid "Listing matched with counterparty %(partner)s."
+msgstr "تمت مطابقة الإعلان مع الطرف المقابل %(partner)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid ""
+"Listing published on the Al Tahtheeb equity marketplace. ROFR window ends on"
+" %(deadline)s."
+msgstr "تم نشر الإعلان في سوق التداول الداخلي لشركة التحذيب. تنتهي فترة حق الأولوية في %(deadline)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"Live share allocations and completed equity ledger activity\n"
+"                                        for"
+msgstr ""
+"توزيعات الأسهم المباشرة ونشاط السجل المكتمل\n"
+"                                        لـ"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__current_quantity
+msgid "Live share quantity from the equity cap table."
+msgstr "كمية الأسهم المباشرة من جدول رأس المال."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__allocation_ids
+msgid "Lot Allocations"
+msgstr "توزيعات الدفعات"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:res.groups,name:ics_altahtheeb_equity_trading.group_equity_trading_manager
+msgid "Manager"
+msgstr "مدير"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid ""
+"Mandatory right-of-first-refusal notice period before external transfers."
+msgstr "فترة الإشعار الإلزامية لحق الأولوية قبل النقل الخارجي."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_company__equity_rofr_window_days
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_config_settings__equity_rofr_window_days
+msgid ""
+"Mandatory right-of-first-refusal notice period for existing shareholders "
+"before an external transfer may proceed."
+msgstr "فترة الإشعار الإلزامية لحق الأولوية للمساهمين الحاليين قبل إتمام النقل الخارجي."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__market_price
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__market_price
+msgid "Market Price"
+msgstr "سعر السوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__market_value
+msgid "Market Value"
+msgstr "القيمة السوقية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__adjustment_amount
+msgid "Market value minus book value. Positive = unrealized gain."
+msgstr "القيمة السوقية ناقص القيمة الدفترية. الموجب = ربح غير محقق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_breadcrumbs_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Marketplace"
+msgstr "السوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.act_window,name:ics_altahtheeb_equity_trading.equity_marketplace_board_action
+#: model:ir.ui.menu,name:ics_altahtheeb_equity_trading.menu_equity_marketplace_board
+msgid "Marketplace Board"
+msgstr "لوحة السوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__marketplace_listing_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__marketplace_listing_id
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_form
+msgid "Marketplace Listing"
+msgstr "إعلان السوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_list
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_search
+msgid "Marketplace Listings"
+msgstr "إعلانات السوق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"Marketplace listing %s released after stale signature timeout — review "
+"required"
+msgstr "أُعيد إعلان السوق %s بعد انتهاء مهلة التوقيع: مراجعة مطلوبة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid "Marketplace listing approved by governance."
+msgstr "تم اعتماد إعلان السوق من قبل الحوكمة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_form
+msgid "Match Counterparty"
+msgstr "مطابقة الطرف المقابل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__state__matched
+msgid "Matched"
+msgstr "مطابق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__matched_partner_id
+msgid "Matched Counterparty"
+msgstr "الطرف المقابل المطابق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_company__equity_max_ownership_pct
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_config_settings__equity_max_ownership_pct
+msgid "Max Ownership Concentration (%)"
+msgstr "الحد الأقصى لتركز الملكية (%)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_company__equity_max_votes_per_share
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_config_settings__equity_max_votes_per_share
+msgid "Max Votes per Share (Bylaws)"
+msgstr "الحد الأقصى للأصوات لكل سهم (النظام الأساسي)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_company__equity_max_voting_power_pct
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_config_settings__equity_max_voting_power_pct
+msgid "Max Voting Power Concentration (%)"
+msgstr "الحد الأقصى لتركز قوة التصويت (%)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid "Maximum ownership concentration (%)"
+msgstr "الحد الأقصى لتركز الملكية (%)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/res_company.py:0
+msgid "Maximum ownership concentration must be between 0 and 100."
+msgstr "يجب أن يكون الحد الأقصى لتركز الملكية بين 0 و100."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_company__equity_max_voting_power_pct
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_config_settings__equity_max_voting_power_pct
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid ""
+"Maximum percentage of aggregate voting rights any single shareholder may "
+"control."
+msgstr "النسبة القصوى من إجمالي حقوق التصويت التي يجوز لمساهم واحد التحكم بها."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_company__equity_max_ownership_pct
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_config_settings__equity_max_ownership_pct
+msgid ""
+"Maximum percentage of issued share capital any single shareholder may hold "
+"under internal governance policies."
+msgstr "النسبة القصوى من رأس المال المصدر التي يجوز لمساهم واحد امتلاكها وفق سياسات الحوكمة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid ""
+"Maximum percentage of issued share capital any single shareholder may hold."
+msgstr "النسبة القصوى من رأس المال المصدر التي يجوز لمساهم واحد امتلاكها."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid "Maximum votes per share"
+msgstr "الحد الأقصى للأصوات لكل سهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/res_company.py:0
+msgid "Maximum votes per share must be strictly positive."
+msgstr "يجب أن يكون الحد الأقصى للأصوات لكل سهم موجباً."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid "Maximum voting power concentration (%)"
+msgstr "الحد الأقصى لتركز قوة التصويت (%)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/res_company.py:0
+msgid "Maximum voting power concentration must be between 0 and 100."
+msgstr "يجب أن يكون الحد الأقصى لتركز قوة التصويت بين 0 و100."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_has_error
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_has_error
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_has_error
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_has_error
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسالة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "My Account"
+msgstr "حسابي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__my_activity_date_deadline
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_breadcrumbs_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_my_home_portfolio
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "My Portfolio"
+msgstr "محفظتي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "My Portfolio Dashboard"
+msgstr "لوحة محفظتي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid "N/A"
+msgstr "غير متاح"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__name
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__name
+msgid "Name"
+msgstr "الاسم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__share_class_id
+msgid "Native Odoo 19 equity security class offered or requested."
+msgstr "فئة الأوراق المالية الأصلية في أودو 19 المعروضة أو المطلوبة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_portfolio_revaluation.py:0
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_trade_audit_log.py:0
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_trade_order.py:0
+msgid "New"
+msgstr "جديد"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_calendar_event_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "حدث تقويم النشاط التالي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_date_deadline
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_summary
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_type_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__sync_retry_at
+msgid "Next Retry At"
+msgstr "إعادة المحاولة التالية في"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "No active holdings"
+msgstr "لا توجد ممتلكات نشطة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "No active listings"
+msgstr "لا توجد إعلانات نشطة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "No active share allocations are recorded yet."
+msgstr "لم يُسجّل أي توزيع أسهم نشط بعد."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "No completed transactions yet"
+msgstr "لا توجد معاملات مكتملة بعد"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.actions.act_window,help:ics_altahtheeb_equity_trading.equity_portfolio_asset_zakat_report_action
+msgid "No portfolio holdings to value for Zakat"
+msgstr "لا توجد ممتلكات محفظة لتقييمها للزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid ""
+"No published share listings are currently available.\n"
+"                                        Check back later or contact your equity administrator."
+msgstr ""
+"لا توجد إعلانات أسهم منشورة حالياً.\n"
+"                                        تحقق لاحقاً أو تواصل مع مسؤول الأسهم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid "No signature request is linked to this equity transaction."
+msgstr "لا يوجد طلب توقيع مرتبط بمعاملة الأسهم هذه."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "No valuation data available yet."
+msgstr "لا تتوفر بيانات تقييم بعد."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_needaction_counter
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_needaction_counter
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_needaction_counter
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_needaction_counter
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_has_error_counter
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_has_error_counter
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_has_error_counter
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_has_error_counter
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_needaction_counter
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_needaction_counter
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_needaction_counter
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_needaction_counter
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_order__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تستلزم إجراءً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_has_error_counter
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_has_error_counter
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_has_error_counter
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_has_error_counter
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_order__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل ذات خطأ في التسليم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__company_id
+msgid "Odoo Company"
+msgstr "شركة أودو"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_transaction__sign_request_id
+msgid "Odoo Sign envelope bound to this equity transfer agreement."
+msgstr "مظروف أودو Sign المرتبط باتفاقية نقل الأسهم هذه."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_portfolio_asset.py:0
+msgid "Only failed portfolio assets can be manually re-queued."
+msgstr "يمكن إعادة جدولة أصول المحفظة الفاشلة يدوياً فقط."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Operation Type"
+msgstr "نوع العملية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__holder_ids
+msgid ""
+"Optional filter: only count shares held by these partners. Leave empty to "
+"include all holders for each share class."
+msgstr "فلتر اختياري: احتساب الأسهم المملوكة لهؤلاء الشركاء فقط. اتركه فارغاً ليشمل جميع الحاملين."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__book_value_account_id
+msgid "Optional override of the fund book value account for this position."
+msgstr "تجاوز اختياري لحساب القيمة الدفترية للصندوق لهذا المركز."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_order__trade_side__other
+msgid "Other"
+msgstr "أخرى"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__unrealized_gain_loss_account_id
+msgid "P&L or OCI account for unrealized fair-value movements."
+msgstr "حساب الأرباح والخسائر أو الدخل الشامل الآخر لتحركات القيمة العادلة غير المحققة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__shareholder_id
+msgid "Partner creating this marketplace listing."
+msgstr "الشريك الذي أنشأ إعلان السوق هذا."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__matched_partner_id
+msgid "Partner who accepted this listing (buyer or seller)."
+msgstr "الشريك الذي قبل هذا الإعلان (مشتري أو بائع)."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_portfolio_asset__sync_state__pending
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_order__state__pending
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__feed_target_price
+msgid "Pending Feed Price"
+msgstr "سعر السوق المعلّق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search
+msgid "Pending Sync"
+msgstr "مزامنة قيد الانتظار"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__portfolio_asset_id
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_form
+msgid "Portfolio Asset"
+msgstr "أصل المحفظة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.act_window,name:ics_altahtheeb_equity_trading.equity_portfolio_asset_action
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__portfolio_asset_ids
+#: model:ir.ui.menu,name:ics_altahtheeb_equity_trading.menu_equity_portfolio_asset
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_investment_fund_view_form
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_list
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search_zakat
+msgid "Portfolio Assets"
+msgstr "أصول المحفظة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_revaluation_view_form
+msgid "Portfolio Revaluation"
+msgstr "إعادة تقييم المحفظة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.act_window,name:ics_altahtheeb_equity_trading.equity_portfolio_revaluation_action
+#: model:ir.ui.menu,name:ics_altahtheeb_equity_trading.menu_equity_portfolio_revaluation
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_revaluation_view_list
+msgid "Portfolio Revaluations"
+msgstr "إعادة تقييم المحفظة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__line_ids
+msgid "Position Lines"
+msgstr "بنود المراكز"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_revaluation_view_form
+msgid "Positions"
+msgstr "المراكز"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_order__state__posted
+msgid "Posted"
+msgstr "مرحّل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Price / Share"
+msgstr "السعر / السهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__sell_unit_price
+msgid "Price per Security"
+msgstr "السعر لكل ورقة مالية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__price_unit
+msgid "Price per Share"
+msgstr "سعر السهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__feed_target_price
+msgid "Price staged by the market feed awaiting cron application."
+msgstr "سعر في انتظار تطبيقه بواسطة المهمة الدورية."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__proceeds
+msgid "Proceeds"
+msgstr "العائدات"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_disposal_view_form
+msgid "Process FIFO Disposal"
+msgstr "معالجة التخلص بطريقة الوارد أولاً"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_form
+msgid "Publish"
+msgstr "نشر"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.actions.act_window,help:ics_altahtheeb_equity_trading.equity_marketplace_board_action
+msgid ""
+"Publish sell offers or buying requests on the Al Tahtheeb internal equity "
+"marketplace."
+msgstr "نشر عروض البيع أو طلبات الشراء في سوق التداول الداخلي لشركة التحذيب."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__state__published
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_search
+msgid "Published"
+msgstr "منشور"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__qty
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__quantity
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__quantity
+msgid "Quantity"
+msgstr "الكمية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_portfolio_asset__sync_state__retry
+msgid "Queued for Retry"
+msgstr "في قائمة إعادة المحاولة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__rofr_deadline
+msgid "ROFR Deadline"
+msgstr "موعد انتهاء حق الأولوية في الشراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__rofr_notice_date
+msgid "ROFR Notice Date"
+msgstr "تاريخ إشعار حق الأولوية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_search_ics
+msgid "ROFR Pending"
+msgstr "حق الأولوية قيد الانتظار"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__rofr_waiver_approved
+msgid "ROFR Waived by Governance"
+msgstr "تنازل الحوكمة عن حق الأولوية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_company__equity_rofr_window_days
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_config_settings__equity_rofr_window_days
+msgid "ROFR Window (Days)"
+msgstr "فترة حق الأولوية (بالأيام)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "ROFR until"
+msgstr "حق الأولوية حتى"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid "ROFR window (days)"
+msgstr "فترة حق الأولوية (بالأيام)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_form
+msgid "Re-queue Sync"
+msgstr "إعادة جدولة المزامنة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__snapshot_before
+msgid "Read-only JSON snapshot of the trade order before the amendment."
+msgstr "لقطة JSON للقراءة فقط لأمر التداول قبل التعديل."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__realized_gain_loss
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__realized_gain_loss
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__realized_gain_loss
+msgid "Realized Gain/Loss"
+msgstr "الربح/الخسارة المحققة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Reference"
+msgstr "المرجع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_user_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_disposal_view_form
+msgid "Result"
+msgstr "النتيجة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__revaluation_id
+msgid "Revaluation"
+msgstr "إعادة التقييم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__journal_id
+msgid "Revaluation Journal"
+msgstr "دفتر يومية إعادة التقييم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_portfolio_revaluation.py:0
+msgid "Revaluation Journal Entries"
+msgstr "قيود يومية إعادة التقييم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid ""
+"Review active share listings, ROFR notice periods,\n"
+"                                        and submit buy proposals."
+msgstr ""
+"راجع إعلانات الأسهم النشطة وفترات إشعار حق الأولوية\n"
+"                                        وقدّم عروض الشراء."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_my_home_portfolio
+msgid "Review your shareholdings and completed trade history"
+msgstr "اطّلع على حصصك وسجل التداول المكتمل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__content_signature
+msgid "SHA-256 digest of the snapshot payload for tamper detection."
+msgstr "بصمة SHA-256 لحمولة اللقطة لاكتشاف العبث."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__message_has_sms_error
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__message_has_sms_error
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__message_has_sms_error
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__message_has_sms_error
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم SMS"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_company__saudi_cjsc_min_shareholders
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_res_config_settings__saudi_cjsc_min_shareholders
+msgid "Saudi CJSC Minimum Shareholders"
+msgstr "الحد الأدنى للمساهمين (شركة مساهمة مقفلة)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid "Saudi CJSC minimum shareholders"
+msgstr "الحد الأدنى للمساهمين في شركة مساهمة مقفلة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/res_company.py:0
+msgid "Saudi CJSC minimum shareholders must be at least 2."
+msgstr "يجب أن يكون الحد الأدنى للمساهمين في شركة مساهمة مقفلة سعودية 2 على الأقل."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_equity_security_class
+msgid "Security Class"
+msgstr "فئة الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_trade_order__trade_side__sell
+msgid "Sell"
+msgstr "بيع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__listing_type__sell
+msgid "Sell Offer"
+msgstr "عرض بيع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_search
+msgid "Sell Offers"
+msgstr "عروض البيع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__sell_transaction_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__sell_transaction_id
+msgid "Sell Transaction"
+msgstr "معاملة البيع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__sell_unit_price
+msgid "Sell Unit Price"
+msgstr "سعر بيع الوحدة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction_disposal.py:0
+msgid "Sell quantity must be strictly positive."
+msgstr "يجب أن تكون كمية البيع أكبر من صفر."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__holder_id
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Seller"
+msgstr "البائع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_lot_allocation__security_class_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__share_class_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__share_class_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation_line__share_class_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__share_class_id
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_search
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search_zakat
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Share Class"
+msgstr "فئة السهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_my_home_portfolio
+msgid "Share Marketplace"
+msgstr "سوق الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Share Qty"
+msgstr "كمية الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid "Share Transfer - %s"
+msgstr "نقل أسهم - %s"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "Share Transfer Agreement"
+msgstr "اتفاقية نقل الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__shareholder_id
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__shareholder_id
+msgid "Shareholder"
+msgstr "المساهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Shares Held"
+msgstr "الأسهم المملوكة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_breadcrumbs_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "Sign Document"
+msgstr "توقيع المستند"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "Sign Equity Transaction"
+msgstr "توقيع معاملة الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Sign Now"
+msgstr "وقّع الآن"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"Sign request automatically cancelled after %(days)s day(s) without "
+"completion for equity transaction %(transaction)s."
+msgstr "تم إلغاء طلب التوقيع تلقائياً بعد %(days)s يوماً دون إتمام للمعاملة %(transaction)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_marketplace_board__state__sign_process
+msgid "Signature In Progress"
+msgstr "التوقيع قيد التنفيذ"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+#: model:ir.model,name:ics_altahtheeb_equity_trading.model_sign_request
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__sign_request_id
+msgid "Signature Request"
+msgstr "طلب التوقيع"
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid "Signature Request - %(document)s"
+msgstr "طلب التوقيع - %(document)s"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"Signature request manually cancelled by %(user)s. Transaction returned to "
+"confirmed state for re-processing."
+msgstr "تم إلغاء طلب التوقيع يدوياً بواسطة %(user)s. أُعيدت المعاملة إلى الحالة المؤكدة لإعادة المعالجة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__snapshot_before
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_trade_audit_log_view_form
+msgid "Snapshot Before Change"
+msgstr "لقطة قبل التغيير"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_transaction__marketplace_listing_id
+msgid "Source marketplace listing that originated this equity transaction."
+msgstr "إعلان السوق المصدر الذي أنشأ هذه المعاملة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid "Stale signature void — review required: %s"
+msgstr "إلغاء التوقيع المنتهي: مراجعة مطلوبة: %s"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__state
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__state
+msgid "State"
+msgstr "الحالة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__state
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__state
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_marketplace_board_view_search
+msgid "Status"
+msgstr "الحالة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_state
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة بناءً على الأنشطة\n"
+"متأخر: تجاوز الموعد النهائي\n"
+"اليوم: النشاط اليوم\n"
+"مخطط: أنشطة مستقبلية."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_company__saudi_cjsc_min_shareholders
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_res_config_settings__saudi_cjsc_min_shareholders
+msgid ""
+"Statutory minimum number of shareholders for a Saudi closed joint stock "
+"company (شركة مساهمة مقفلة) under MOCI bylaws."
+msgstr "الحد الأدنى النظامي لعدد المساهمين في شركة مساهمة مقفلة سعودية وفق أنظمة وزارة التجارة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.res_config_settings_view_form_equity_trading
+msgid "Statutory minimum shareholders for a Saudi closed joint stock company."
+msgstr "الحد الأدنى النظامي للمساهمين في شركة مساهمة مقفلة سعودية."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_security_class__zakat_classification__long_term_strategic
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search_zakat
+msgid "Strategic / Long-term"
+msgstr "استراتيجي / طويل الأجل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Submit Buy Proposal"
+msgstr "تقديم عرض شراء"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__sync_attempts
+msgid "Sync Attempts"
+msgstr "محاولات المزامنة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__sync_state
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search
+msgid "Sync State"
+msgstr "حالة المزامنة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_portfolio_asset__sync_state__synced
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search
+msgid "Synced"
+msgstr "متزامن"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/res_company.py:0
+msgid "The ROFR window must be a strictly positive number of days."
+msgstr "يجب أن تكون فترة حق الأولوية عدداً موجباً من الأيام."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid ""
+"The Right of First Refusal (ROFR) window is still open for this listing. "
+"Please wait until the deadline has passed."
+msgstr "لا تزال فترة حق الأولوية في الشراء سارية لهذا الإعلان. يرجى الانتظار حتى انتهاء الموعد النهائي."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__equity_transaction_id
+msgid "The equity.transaction spawned when this listing was matched."
+msgstr "معاملة الأسهم التي أُنشئت عند مطابقة هذا الإعلان."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+#: model:ir.model.constraint,message:ics_altahtheeb_equity_trading.constraint_equity_marketplace_board_name_unique
+msgid "The listing ID must be unique."
+msgstr "يجب أن يكون رقم الإعلان فريداً."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction_disposal.py:0
+msgid ""
+"The sell transaction must be in a finalized ledger state (%(states)s) before"
+" FIFO disposal."
+msgstr "يجب أن تكون معاملة البيع في حالة سجل نهائية (%(states)s) قبل التخلص بطريقة الوارد أولاً."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid "This marketplace listing is no longer available."
+msgstr "لم يعد إعلان السوق هذا متاحاً."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Total"
+msgstr "الإجمالي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__total_adjustment
+msgid "Total Adjustment"
+msgstr "إجمالي التسوية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__total_book_value
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_zakat_report_view_list
+msgid "Total Book Value"
+msgstr "إجمالي القيمة الدفترية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__cost_basis_total
+msgid "Total Cost Basis"
+msgstr "إجمالي أساس التكلفة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_list_zakat
+msgid "Total Deductible"
+msgstr "إجمالي المخصوم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__total_market_value
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_zakat_report_view_list
+msgid "Total Market Value"
+msgstr "إجمالي القيمة السوقية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__price_total
+msgid "Total Price"
+msgstr "السعر الإجمالي"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction_disposal__proceeds_total
+msgid "Total Proceeds"
+msgstr "إجمالي العائدات"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Total Shares"
+msgstr "إجمالي الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Total Shares Owned"
+msgstr "إجمالي الأسهم المملوكة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "Total Value"
+msgstr "القيمة الإجمالية"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_list_zakat
+msgid "Total Zakat Base"
+msgstr "إجمالي وعاء الزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_zakat_report_view_list
+msgid "Total Zakat Base Contribution"
+msgstr "إجمالي مساهمة وعاء الزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_zakat_report_view_list
+msgid "Total Zakat Deductible"
+msgstr "إجمالي مخصوم الزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__state
+msgid ""
+"Tracks the listing through its lifecycle.  The 'sign_process' state means "
+"the linked equity.transaction has a live Sign envelope; the listing is "
+"locked until signing completes or the nightly stale-signature cron releases "
+"it back to 'published'."
+msgstr "يتتبع الإعلان دورة حياته. تعني حالة 'sign_process' أن معاملة الأسهم المرتبطة لديها مظروف Sign نشط؛ يبقى الإعلان مقفلاً حتى اكتمال التوقيع."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_trade_order.py:0
+#: model:ir.actions.act_window,name:ics_altahtheeb_equity_trading.equity_trade_audit_log_action
+#: model:ir.ui.menu,name:ics_altahtheeb_equity_trading.menu_equity_trade_audit_log
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+msgid "Trade Audit Logs"
+msgstr "سجلات تدقيق التداول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__transaction_date
+msgid "Trade Date"
+msgstr "تاريخ التداول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__trade_order_id
+msgid "Trade Order"
+msgstr "أمر التداول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid "Trade Order Log"
+msgstr "سجل أمر التداول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_transaction__trade_order_ids
+msgid "Trade Order Logs"
+msgstr "سجلات أوامر التداول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.act_window,name:ics_altahtheeb_equity_trading.equity_trade_order_action
+#: model:ir.ui.menu,name:ics_altahtheeb_equity_trading.menu_equity_trade_order
+msgid "Trade Orders"
+msgstr "أوامر التداول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__trade_side
+msgid "Trade Side"
+msgstr "جانب التداول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+msgid "Trading & Compliance"
+msgstr "التداول والامتثال"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_security_class__zakat_classification__short_term_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search_zakat
+msgid "Trading (Short-term)"
+msgstr "تداول (قصير الأجل)"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.actions.act_window,help:ics_altahtheeb_equity_trading.equity_portfolio_asset_zakat_report_action
+msgid ""
+"Trading holdings contribute fair market value to the Zakat base.\n"
+"                Strategic holdings are excluded from the base and may qualify\n"
+"                for separate deduction per GAZT/ZATCA rules."
+msgstr ""
+"تساهم ممتلكات التداول بالقيمة السوقية العادلة في وعاء الزكاة.\n"
+"                تُستبعد الممتلكات الاستراتيجية من الوعاء وقد تستحق\n"
+"                خصماً منفصلاً وفق قواعد هيئة الزكاة والضريبة والجمارك."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Transaction Reference"
+msgstr "مرجع المعاملة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "Transaction date:"
+msgstr "تاريخ المعاملة:"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "Transaction:"
+msgstr "المعاملة:"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__activity_exception_decoration
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع النشاط الاستثنائي في السجل."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__unit_price
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "Unit Price"
+msgstr "سعر الوحدة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__unrealized_gain_loss_account_id
+msgid "Unrealized Gain/Loss Account"
+msgstr "حساب الأرباح/الخسائر غير المحققة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_audit_log__user_id
+#: model:res.groups,name:ics_altahtheeb_equity_trading.group_equity_trading_user
+msgid "User"
+msgstr "مستخدم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_form_ics
+msgid "View Audit Trail"
+msgstr "عرض مسار التدقيق"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields.selection,name:ics_altahtheeb_equity_trading.selection__equity_transaction__state__waiting_signature
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_transaction_view_search_ics
+msgid "Waiting Signature"
+msgstr "بانتظار التوقيع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_investment_fund__website_message_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_marketplace_board__website_message_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__website_message_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__website_message_ids
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_trade_order__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_investment_fund__website_message_ids
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_marketplace_board__website_message_ids
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__website_message_ids
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_portfolio_revaluation__website_message_ids
+#: model:ir.model.fields,help:ics_altahtheeb_equity_trading.field_equity_trade_order__website_message_ids
+msgid "Website communication history"
+msgstr "سجل التواصل عبر الموقع"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid "You are not an authorised signer for this equity transaction."
+msgstr "لست موقّعاً مخولاً على معاملة الأسهم هذه."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid "You cannot match your own marketplace listing."
+msgstr "لا يمكنك مطابقة إعلانك الخاص في السوق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid ""
+"You cannot sign this document yet. Please wait until the signature request "
+"is available for your role."
+msgstr "لا يمكنك التوقيع على هذا المستند بعد. يرجى الانتظار حتى يصبح طلب التوقيع متاحاً لدورك."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid "You do not have permission to perform this marketplace action."
+msgstr "ليس لديك صلاحية لتنفيذ هذا الإجراء في السوق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "You have"
+msgstr "لديك"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "Your cryptographic signature is processed securely by Odoo Sign."
+msgstr "تُعالج توقيعاتك المشفرة بأمان عبر أودو Sign."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid ""
+"Your equity allocations will appear here once shares\n"
+"                                        are recorded in the cap table."
+msgstr ""
+"ستظهر توزيعات أسهمك هنا بعد تسجيل الأسهم\n"
+"                                        في جدول رأس المال."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.ui.menu,name:ics_altahtheeb_equity_trading.menu_equity_portfolio_asset_zakat_report
+msgid "Zakat Asset Valuation"
+msgstr "تقييم أصول الزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.actions.act_window,name:ics_altahtheeb_equity_trading.equity_portfolio_asset_zakat_report_action
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_zakat_report_view_list
+msgid "Zakat Asset Valuation Report"
+msgstr "تقرير تقييم أصول الزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__zakat_base_contribution_value
+msgid "Zakat Base Contribution Value"
+msgstr "قيمة مساهمة وعاء الزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__zakat_classification
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_security_class__zakat_classification
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.equity_portfolio_asset_view_search_zakat
+msgid "Zakat Classification"
+msgstr "تصنيف الزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model:ir.model.fields,field_description:ics_altahtheeb_equity_trading.field_equity_portfolio_asset__zakat_deductible_value
+msgid "Zakat Deductible Value"
+msgstr "قيمة مخصوم الزكاة"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "breadcrumb"
+msgstr "مسار التنقل"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "class(es)"
+msgstr "فئة/فئات"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "equity transfer(s) awaiting your electronic signature."
+msgstr "معاملة/معاملات نقل أسهم بانتظار توقيعك الإلكتروني."
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "equity_marketplace"
+msgstr "سوق_الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "equity_portfolio"
+msgstr "محفظة_الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_sign_iframe_view
+msgid "equity_sign"
+msgstr "توقيع_الأسهم"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_portfolio_revaluation.py:0
+msgid "id"
+msgstr "المعرّف"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.marketplace_dashboard_view
+msgid "listing(s)"
+msgstr "إعلان/إعلانات"
+
+
+#. module: ics_altahtheeb_equity_trading
+#: model_terms:ir.ui.view,arch_db:ics_altahtheeb_equity_trading.portal_portfolio_dashboard_view
+msgid "record(s)"
+msgstr "سجل/سجلات"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_trade_order.py:0
+msgid "trade_order_id"
+msgstr "معرّف أمر التداول"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"تم إلغاء طلب التوقيع تلقائياً بعد %(days)s يوماً دون إتمام للمعاملة "
+"%(transaction)s."
+msgstr "تم إلغاء طلب التوقيع تلقائياً بعد %(days)s يوماً دون إتمام للمعاملة %(transaction)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"تم إلغاء طلب التوقيع يدوياً بواسطة %(user)s. أُعيدت المعاملة إلى الحالة "
+"المؤكدة لإعادة المعالجة."
+msgstr "تم إلغاء طلب التوقيع يدوياً بواسطة %(user)s. أُعيدت المعاملة إلى الحالة المؤكدة لإعادة المعالجة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid "تم إنشاء معاملة نقل أسهم %(transaction)s من إعلان السوق."
+msgstr "تم إنشاء معاملة نقل أسهم %(transaction)s من إعلان السوق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid "تم اعتماد إعلان السوق من قبل الحوكمة."
+msgstr "تم اعتماد إعلان السوق من قبل الحوكمة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid "تم الإنشاء من إعلان السوق %(listing)s."
+msgstr "تم الإنشاء من إعلان السوق %(listing)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"تم بدء طلب التوقيع القانوني. يوقع المساهم أولاً يليه المفوض بالتوقيع. تابع "
+"التقدم هنا: %s"
+msgstr "تم بدء طلب التوقيع القانوني. يوقع المساهم أولاً يليه المفوض بالتوقيع. تابع التقدم هنا: %s"
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid ""
+"تم نشر الإعلان في سوق التداول الداخلي لشركة التحذيب. تنتهي فترة حق الأولوية "
+"في الشراء في %(deadline)s."
+msgstr "تم نشر الإعلان في سوق التداول الداخلي لشركة التحذيب. تنتهي فترة حق الأولوية في الشراء في %(deadline)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid ""
+"تمت مطابقة الإعلان بنجاح. تم إنشاء معاملة نقل أسهم مسودة وهي بانتظار "
+"الاعتماد الداخلي."
+msgstr "تمت مطابقة الإعلان بنجاح. تم إنشاء معاملة نقل أسهم مسودة وهي بانتظار الاعتماد الداخلي."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid "تمت مطابقة الإعلان مع الطرف المقابل %(partner)s."
+msgstr "تمت مطابقة الإعلان مع الطرف المقابل %(partner)s."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid ""
+"حدث خطأ غير متوقع أثناء معالجة عرض الشراء. يرجى المحاولة مرة أخرى أو التواصل"
+" مع الدعم."
+msgstr "حدث خطأ غير متوقع أثناء معالجة عرض الشراء. يرجى المحاولة مرة أخرى أو التواصل مع الدعم."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid ""
+"لا تزال فترة حق الأولوية في الشراء (ROFR) سارية لهذا الإعلان. يرجى الانتظار "
+"حتى انتهاء الموعد النهائي."
+msgstr "لا تزال فترة حق الأولوية في الشراء (ROFR) سارية لهذا الإعلان. يرجى الانتظار حتى انتهاء الموعد النهائي."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid ""
+"لا يمكنك التوقيع على هذا المستند بعد. يرجى الانتظار حتى يصبح طلب التوقيع "
+"متاحاً لدورك."
+msgstr "لا يمكنك التوقيع على هذا المستند بعد. يرجى الانتظار حتى يصبح طلب التوقيع متاحاً لدورك."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid "لا يمكنك مطابقة إعلانك الخاص في السوق."
+msgstr "لا يمكنك مطابقة إعلانك الخاص في السوق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid "لا يوجد طلب توقيع مرتبط بهذه المعاملة."
+msgstr "لا يوجد طلب توقيع مرتبط بهذه المعاملة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/portal.py:0
+msgid "لست موقعاً مخولاً على هذه المعاملة."
+msgstr "لست موقعاً مخولاً على هذه المعاملة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid "لم يعد إعلان السوق هذا متاحاً."
+msgstr "لم يعد إعلان السوق هذا متاحاً."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/controllers/marketplace.py:0
+msgid "ليس لديك صلاحية لتنفيذ هذا الإجراء في السوق."
+msgstr "ليس لديك صلاحية لتنفيذ هذا الإجراء في السوق."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid ""
+"⚠️ Marketplace listing %(listing)s has been automatically released back to "
+"published status because the linked signature request on transaction "
+"%(transaction)s expired after %(days)s day(s) without completion. The "
+"listing is now open for new bids."
+msgstr "⚠️ أُعيد إعلان السوق %(listing)s تلقائياً إلى حالة المنشور لانتهاء طلب التوقيع المرتبط بالمعاملة %(transaction)s بعد %(days)s يوماً دون إتمام. الإعلان متاح الآن لتلقي عروض جديدة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"⚠️ This equity trade was automatically voided by the system because the "
+"linked Sign request remained incomplete for more than %(days)s day(s). The "
+"Sign envelope has been cancelled and any linked marketplace listing has been"
+" released back to published status so other partners may bid again. Please "
+"create a new trade if you wish to proceed."
+msgstr "⚠️ تم إلغاء صفقة الأسهم هذه تلقائياً من قِبَل النظام لأن طلب التوقيع المرتبط لم يكتمل لأكثر من %(days)s يوماً. تم إلغاء مظروف التوقيع وإعادة إعلان السوق إلى حالة المنشور. يرجى إنشاء صفقة جديدة إذا كنت ترغب في المتابعة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_marketplace_board.py:0
+msgid ""
+"⚠️ أُعيد إعلان السوق %(listing)s تلقائياً إلى حالة المنشور لانتهاء طلب "
+"التوقيع المرتبط بالمعاملة %(transaction)s بعد %(days)s يوماً دون إتمام. "
+"الإعلان متاح الآن لتلقي عروض جديدة."
+msgstr "⚠️ أُعيد إعلان السوق %(listing)s تلقائياً إلى حالة المنشور لانتهاء طلب التوقيع المرتبط بالمعاملة %(transaction)s بعد %(days)s يوماً دون إتمام. الإعلان متاح الآن لتلقي عروض جديدة."
+
+
+#. module: ics_altahtheeb_equity_trading
+#. odoo-python
+#: code:addons/ics_altahtheeb_equity_trading/models/equity_transaction.py:0
+msgid ""
+"⚠️ تم إلغاء صفقة الأسهم هذه تلقائياً من قِبَل النظام لأن طلب التوقيع المرتبط"
+" لم يكتمل لأكثر من %(days)s يوماً. تم إلغاء مظروف التوقيع وإعادة إعلان السوق"
+" المرتبط إلى حالة المنشور ليتمكن الشركاء الآخرون من تقديم عروض جديدة. يرجى "
+"إنشاء صفقة جديدة إذا كنت ترغب في المتابعة."
+msgstr "⚠️ تم إلغاء صفقة الأسهم هذه تلقائياً من قِبَل النظام لأن طلب التوقيع المرتبط لم يكتمل لأكثر من %(days)s يوماً. تم إلغاء مظروف التوقيع وإعادة إعلان السوق المرتبط إلى حالة المنشور ليتمكن الشركاء الآخرون من تقديم عروض جديدة. يرجى إنشاء صفقة جديدة إذا كنت ترغب في المتابعة."

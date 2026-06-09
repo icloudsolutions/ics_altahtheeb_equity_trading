@@ -35,10 +35,35 @@
                             type="object"
                             class="btn-primary"
                             invisible="state != 'draft'"/>
+                    <button name="action_match_selected_partner"
+                            string="Match Counterparty"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'published' or not matched_partner_id"/>
+                    <button name="action_approve"
+                            string="Approve"
+                            type="object"
+                            class="btn-primary"
+                            groups="ics_altahtheeb_equity_trading.group_equity_trading_manager"
+                            invisible="state != 'matched'"/>
+                    <button name="action_create_equity_transaction"
+                            string="Create Transaction"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state not in ('matched', 'approved') or equity_transaction_id"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,published,matched,approved,sign_process,done"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_equity_transaction"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exchange"
+                                invisible="not equity_transaction_id">
+                            <span class="o_stat_text">Equity Transaction</span>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1"/>
@@ -58,6 +83,7 @@
                             <field name="currency_id" readonly="1"/>
                             <field name="rofr_deadline" readonly="1"/>
                             <field name="matched_partner_id" readonly="state not in ('published', 'matched')"/>
+                            <field name="equity_transaction_id" readonly="1"/>
                         </group>
                     </group>
                 </sheet>
@@ -162,11 +188,37 @@
         </field>
     </record>
 
+    <record id="equity_portfolio_asset_view_search" model="ir.ui.view">
+        <field name="name">equity.portfolio.asset.search</field>
+        <field name="model">equity.portfolio.asset</field>
+        <field name="arch" type="xml">
+            <search string="Portfolio Assets">
+                <field name="display_name"/>
+                <field name="share_class_id"/>
+                <field name="investment_fund_id"/>
+                <filter string="Synced" name="filter_synced" domain="[('sync_state', '=', 'synced')]"/>
+                <filter string="Pending Sync" name="filter_pending" domain="[('sync_state', 'in', ('pending', 'retry'))]"/>
+                <filter string="Failed Sync" name="filter_failed" domain="[('sync_state', '=', 'failed')]"/>
+                <group>
+                    <filter string="Investment Fund"
+                            name="group_investment_fund"
+                            context="{'group_by': 'investment_fund_id'}"/>
+                    <filter string="Share Class"
+                            name="group_share_class"
+                            context="{'group_by': 'share_class_id'}"/>
+                    <filter string="Sync State"
+                            name="group_sync_state"
+                            context="{'group_by': 'sync_state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="equity_portfolio_asset_action" model="ir.actions.act_window">
         <field name="name">Portfolio Assets</field>
         <field name="res_model">equity.portfolio.asset</field>
         <field name="view_mode">list,form</field>
-        <field name="search_view_id" ref="equity_portfolio_asset_view_search_zakat"/>
+        <field name="search_view_id" ref="equity_portfolio_asset_view_search"/>
     </record>
 
 </odoo>

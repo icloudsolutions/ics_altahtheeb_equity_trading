@@ -3,8 +3,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
-from . import tools
-
 
 class ResCompany(models.Model):
     _inherit = 'res.company'

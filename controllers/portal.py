@@ -424,10 +424,11 @@ class AltahtheebEquityTradingPortal(PortalEquity):
                 arabic=_("لا يوجد طلب توقيع مرتبط بهذه المعاملة."),
             ))
 
-        try:
-            transaction.check_saudi_statutory_bounds()
-        except ValidationError as exc:
-            raise AccessError(exc.args[0]) from exc
+        if transaction.state != 'waiting_signature':
+            try:
+                transaction.check_saudi_statutory_bounds()
+            except ValidationError as exc:
+                raise AccessError(exc.args[0]) from exc
 
         sign_url = self._get_transaction_sign_url(transaction, partner)
         if not sign_url:

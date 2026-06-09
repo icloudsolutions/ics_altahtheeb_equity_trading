@@ -25,7 +25,6 @@ class EquitySecurityClass(models.Model):
         string="Zakat Classification",
         default='short_term_trading',
         required=True,
-        tracking=True,
         help=(
             "GAZT/ZATCA treatment for listed share holdings:\n"
             "• Trading — included in the Zakat base at year-end fair market value.\n"

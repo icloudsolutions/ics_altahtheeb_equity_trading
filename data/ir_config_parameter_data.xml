@@ -21,9 +21,5 @@
         <field name="value">5</field>
     </record>
 
-    <record id="config_audit_log_signature_secret" model="ir.config_parameter">
-        <field name="key">ics_altahtheeb_equity_trading.audit_log_signature_secret</field>
-        <field name="value">change-me-in-production</field>
-    </record>
 
 </odoo>

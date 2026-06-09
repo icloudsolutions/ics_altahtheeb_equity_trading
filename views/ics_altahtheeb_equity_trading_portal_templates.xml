@@ -1,31 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ics_altahtheeb_equity_trading_portal_templates.xml
-    ===================================================
-    Portal QWeb templates for the Al Tahtheeb Equity Trading module.
-
-    Design principles
-    -----------------
-    * No inline CSS — all presentation is expressed through native Odoo 19
-      Bootstrap 5 utility classes available in the portal layout.
-    * Bilingual-aware: labels are translatable via ``_()``; Arabic text support
-      is inherited from the portal's ``lang`` context.
-    * Accessibility: semantic ``<th scope>``, ARIA roles, and ``aria-label``
-      attributes are used throughout.
-    * Mobile-first: Bootstrap 5 column helpers (``col-12 col-sm-6 col-xl-4``)
-      ensure a consistent experience on all screen sizes.
-
-    Templates defined
-    -----------------
-    1. ``portal_trading_templates``          — parent grouping record.
-    2. ``portal_my_home_portfolio``          — injects "My Portfolio" entry on
-                                              the My Account home page.
-    3. ``portal_sign_iframe_view``           — Odoo Sign iframe for pending
-                                              equity transfer signatures.
-    4. ``portal_portfolio_dashboard_view``   — My Portfolio Dashboard (this PR).
-    5. ``marketplace_dashboard_view``        — Active listing marketplace.
-    6. ``portal_breadcrumbs_equity_trading`` — breadcrumb trail extensions.
--->
 <odoo>
 
     <!-- ================================================================== -->
@@ -195,27 +168,6 @@
     <!-- ================================================================== -->
     <!-- 4. My Portfolio Dashboard                                           -->
     <!-- ================================================================== -->
-    <!--
-        Context variables provided by the Python controller:
-        ┌─────────────────────────┬───────────────────────────────────────────┐
-        │ current_partner         │ res.partner of the authenticated user     │
-        │ total_shares            │ int / float — aggregated share count      │
-        │ portfolio_valuation     │ float — sum of cap-table valuation fields │
-        │ display_currency        │ res.currency browse record                │
-        │ has_mixed_currencies    │ bool — multi-currency portfolio flag      │
-        │ share_class_rows        │ list[dict] — per-class allocation rows    │
-        │ has_holdings            │ bool — True when share_class_rows is set  │
-        │ transaction_rows        │ list[dict] — completed transaction rows   │
-        │ has_transactions        │ bool — True when transaction_rows is set  │
-        │ fmt_amount              │ callable(amount, currency) → str          │
-        │ fmt_date                │ callable(date_val) → str                  │
-        │ today                   │ date — server-side today for comparisons  │
-        └─────────────────────────┴───────────────────────────────────────────┘
-
-        Each transaction_row dict contains:
-          date, reference, share_class, operation_code ('buy'|'sell'|'other'),
-          operation_label, qty, unit_price, currency, state, state_label
-    -->
     <template id="portal_portfolio_dashboard_view"
               name="My Portfolio Dashboard">
         <t t-call="portal.portal_layout">
@@ -225,9 +177,9 @@
             <div class="o_portal_wrap bg-light">
                 <div class="container-fluid container-lg py-4 px-3 px-md-4">
 
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <!-- Breadcrumb (mobile fallback; desktop uses portal layout) -->
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <nav aria-label="breadcrumb" class="mb-4 d-md-none">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item">
@@ -299,9 +251,9 @@
                         </div>
                     </t>
 
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <!-- Page header card                                      -->
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body p-4 p-md-5">
                             <div class="d-flex flex-column flex-md-row
@@ -327,9 +279,9 @@
                         </div>
                     </div>
 
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <!-- Summary cards row                                     -->
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <div class="row g-4 mb-4">
 
                         <!-- Summary Box 1: Total Shares Owned -->
@@ -418,9 +370,9 @@
                     </div>
                     <!-- /Summary cards row -->
 
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <!-- Current Share Allocations table                       -->
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-header bg-white border-bottom py-3 px-4">
                             <div class="d-flex justify-content-between align-items-center">
@@ -516,9 +468,9 @@
                     </div>
                     <!-- /Current Share Allocations -->
 
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <!-- Historical Transactions Log                           -->
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <div class="card border-0 shadow-sm">
                         <div class="card-header bg-white border-bottom py-3 px-4">
                             <div class="d-flex justify-content-between align-items-center">
@@ -883,9 +835,9 @@
                     </div>
                     <!-- /Active Listings card -->
 
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <!-- Confirmation modals (one per actionable listing)     -->
-                    <!-- -------------------------------------------------- -->
+                    <!-- section -->
                     <t t-foreach="listings" t-as="listing">
                         <t t-if="listing.listing_type == 'sell'
                                  and listing.shareholder_id != current_partner
